@@ -1,0 +1,93 @@
+{
+  "water_quality_standards": {
+    "colombia": {
+      "pH": {
+        "min": 6.5,
+        "max": 8.5,
+        "optimal_min": 7.0,
+        "optimal_max": 7.5,
+        "unit": "pH"
+      },
+      "dissolved_oxygen": {
+        "min": 5.0,
+        "max": 14.0,
+        "optimal_min": 7.0,
+        "optimal_max": 10.0,
+        "unit": "mg/L"
+      },
+      "temperature": {
+        "min": 0.0,
+        "max": 30.0,
+        "optimal_min": 18.0,
+        "optimal_max": 25.0,
+        "unit": "°C"
+      },
+      "turbidity": {
+        "min": 0.0,
+        "max": 1.0,
+        "optimal_min": 0.0,
+        "optimal_max": 0.3,
+        "unit": "NTU"
+      },
+      "conductivity": {
+        "min": 50.0,
+        "max": 500.0,
+        "optimal_min": 100.0,
+        "optimal_max": 300.0,
+        "unit": "µS/cm"
+      },
+      "ammonia": {
+        "min": 0.0,
+        "max": 0.5,
+        "optimal_min": 0.0,
+        "optimal_max": 0.02,
+        "unit": "mg/L"
+      },
+      "nitrites": {
+        "min": 0.0,
+        "max": 1.0,
+        "optimal_min": 0.0,
+        "optimal_max": 0.1,
+        "unit": "mg/L"
+      },
+      "nitrates": {
+        "min": 0.0,
+        "max": 10.0,
+        "optimal_min": 0.0,
+        "optimal_max": 5.0,
+        "unit": "mg/L"
+      }
+    }
+  },
+  "alert_rules": [
+    {
+      "parameter": "pH",
+      "condition": "outside_range",
+      "min_value": 6.5,
+      "max_value": 8.5,
+      "severity": "high",
+      "message": "pH fuera del rango aceptable"
+    },
+    {
+      "parameter": "dissolved_oxygen",
+      "condition": "less_than",
+      "threshold": 5.0,
+      "severity": "critical",
+      "message": "Nivel de oxígeno disuelto crítico"
+    },
+    {
+      "parameter": "temperature",
+      "condition": "greater_than",
+      "threshold": 30.0,
+      "severity": "medium",
+      "message": "Temperatura del agua elevada"
+    },
+    {
+      "parameter": "turbidity",
+      "condition": "greater_than",
+      "threshold": 1.0,
+      "severity": "high",
+      "message": "Turbidez excesiva detectada"
+    }
+  ]
+}
