@@ -119,10 +119,10 @@ class StationDetailPage extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           _buildInfoRow(Icons.info_outline, 'ID', station.id),
-          if (station.description != null) ...[
-            const SizedBox(height: 12),
-            _buildInfoRow(Icons.description, 'Descripción', station.description!),
-          ],
+          ...[
+          const SizedBox(height: 12),
+          _buildInfoRow(Icons.description, 'Descripción', station.description!),
+        ],
           const Divider(height: 32),
         ],
       ),

@@ -122,7 +122,7 @@ class CsvDataService {
     final latestDate = allReadings.first.timestamp;
     final startDate = latestDate.subtract(Duration(days: days));
     
-    print('📆 Historical range: $startDate to $latestDate (${days} days)');
+    print('📆 Historical range: $startDate to $latestDate ($days days)');
     
     // Filter by date range from latest available data
     final filtered = allReadings.where((reading) {
@@ -132,7 +132,7 @@ class CsvDataService {
     // Sort by timestamp ascending
     filtered.sort((a, b) => a.timestamp.compareTo(b.timestamp));
     
-    print('📊 Filtered readings: ${filtered.length} from ${filtered.length > 0 ? filtered.first.timestamp : 'N/A'}');
+    print('📊 Filtered readings: ${filtered.length} from ${filtered.isNotEmpty ? filtered.first.timestamp : 'N/A'}');
     
     return filtered;
   }

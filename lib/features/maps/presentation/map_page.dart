@@ -19,7 +19,7 @@ class _MapPageState extends State<MapPage> {
   final MapController _mapController = MapController();
   final List<Marker> _markers = [];
   List<WaterStation> _stations = [];
-  Map<String, WaterQualityReading> _latestReadings = {};
+  final Map<String, WaterQualityReading> _latestReadings = {};
   bool _isLoading = true;
 
   // Center point: CA-09 (closest to Acarí town)

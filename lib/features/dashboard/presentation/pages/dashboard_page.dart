@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/themes/app_theme.dart';
 import '../../../../shared/data/services/csv_data_service.dart';
 import '../../../../shared/data/services/simulated_data_service.dart';
+import '../../../../shared/data/services/sensor_simulator_service.dart';
 import '../../../../shared/domain/domain.dart';
 import '../../../auth/data/repositories/auth_repository.dart';
 import '../../../charts/presentation/charts_page.dart';
@@ -22,11 +23,82 @@ class _DashboardPageState extends State<DashboardPage> {
   Map<String, WaterQualityReading> _currentReadings = {};
   bool _isLoading = true;
   bool _isLoggedIn = false;
+  bool _useRealtimeSimulation = true; // Toggle between CSV and realtime
+  final _sensorSimulator = SensorSimulatorService();
 
   @override
   void initState() {
     super.initState();
     _loadData();
+    
+    if (_useRealtimeSimulation) {
+      // Start IoT sensor simulation (async)
+      _startRealtimeUpdates();
+    }
+  }
+
+  @override
+  void dispose() {
+    _sensorSimulator.stopSimulation();
+    super.dispose();
+  }
+
+  /// Start real-time sensor simulation (mimics MQTT/Firebase)
+  Future<void> _startRealtimeUpdates() async {
+    print('🚀 Starting real-time sensor simulation...');
+    
+    // Subscribe to sensor updates
+    _sensorSimulator.subscribe(_onSensorData);
+    
+    // Start simulation with 30 second intervals (loads CSV first)
+    await _sensorSimulator.startSimulation(
+      interval: const Duration(seconds: 30),
+    );
+  }
+
+  /// Handle incoming sensor data (like MQTT message received)
+  void _onSensorData(WaterQualityReading reading) {
+    if (mounted) {
+      setState(() {
+        _currentReadings[reading.stationId] = reading;
+      });
+      
+      // Show notification for critical alerts
+      if (reading.alerts.isNotEmpty && 
+          (reading.overallStatus == WaterQualityStatus.veryPoor || 
+           reading.overallStatus == WaterQualityStatus.poor)) {
+        _showAlertSnackbar(reading);
+      }
+    }
+  }
+
+  /// Show alert notification
+  void _showAlertSnackbar(WaterQualityReading reading) {
+    final station = _stations.firstWhere((s) => s.id == reading.stationId);
+    
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          '⚠️ Alerta en ${station.name}: ${reading.alerts.first}',
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.red,
+        duration: const Duration(seconds: 5),
+        action: SnackBarAction(
+          label: 'Ver',
+          textColor: Colors.white,
+          onPressed: () {
+            // Navigate to station detail
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => StationDetailPage(station: station),
+              ),
+            );
+          },
+        ),
+      ),
+    );
   }
 
   Future<void> _loadData() async {
@@ -41,15 +113,25 @@ class _DashboardPageState extends State<DashboardPage> {
     final stations = SimulatedDataService.createDefaultStations();
     final readings = <String, WaterQualityReading>{};
 
-    // Get latest readings from CSV for each station
-    for (final station in stations) {
-      final stationReadings = await CsvDataService.getStationReadings(station.id);
-      if (stationReadings.isNotEmpty) {
-        // Use the most recent reading
-        readings[station.id] = stationReadings.last;
-      } else {
-        // Fallback to simulated data if no CSV data
-        readings[station.id] = SimulatedDataService.generateReading(station.id);
+    if (_useRealtimeSimulation) {
+      // Use current sensor readings if available
+      for (final station in stations) {
+        if (_currentReadings.containsKey(station.id)) {
+          readings[station.id] = _currentReadings[station.id]!;
+        } else {
+          // Generate initial reading
+          readings[station.id] = SimulatedDataService.generateReading(station.id);
+        }
+      }
+    } else {
+      // Use CSV data (historical mode)
+      for (final station in stations) {
+        final stationReadings = await CsvDataService.getStationReadings(station.id);
+        if (stationReadings.isNotEmpty) {
+          readings[station.id] = stationReadings.last;
+        } else {
+          readings[station.id] = SimulatedDataService.generateReading(station.id);
+        }
       }
     }
 
@@ -71,8 +153,47 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Monitor de Agua - Arequipa'),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Monitor de Agua - Arequipa'),
+            if (_useRealtimeSimulation)
+              Row(
+                children: [
+                  Container(
+                    width: 8,
+                    height: 8,
+                    decoration: const BoxDecoration(
+                      color: Colors.greenAccent,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                  const SizedBox(width: 4),
+                  const Text(
+                    'En vivo (actualiza cada 30s)',
+                    style: TextStyle(fontSize: 11, color: Colors.white70),
+                  ),
+                ],
+              ),
+          ],
+        ),
         actions: [
+          // Toggle between realtime and historical mode
+          IconButton(
+            icon: Icon(_useRealtimeSimulation ? Icons.sensors : Icons.history),
+            tooltip: _useRealtimeSimulation ? 'Modo histórico' : 'Modo tiempo real',
+            onPressed: () {
+              setState(() {
+                _useRealtimeSimulation = !_useRealtimeSimulation;
+                if (_useRealtimeSimulation) {
+                  _startRealtimeUpdates();
+                } else {
+                  _sensorSimulator.stopSimulation();
+                }
+              });
+              _loadData();
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: _loadData,

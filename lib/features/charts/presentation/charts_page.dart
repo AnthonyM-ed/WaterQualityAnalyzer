@@ -20,7 +20,7 @@ class _ChartsPageState extends State<ChartsPage> {
   String _selectedStationId = '';
   String _selectedParameter = 'pH';
   String _selectedPeriod = '7d'; // 7d, 30d, 90d
-  List<Map<String, dynamic>> _historicalData = [];
+  final List<Map<String, dynamic>> _historicalData = [];
   bool _isLoading = true;
 
   final List<String> _parameters = ['pH', 'tds', 'turbidity', 'chlorine_residual'];
@@ -137,7 +137,7 @@ class _ChartsPageState extends State<ChartsPage> {
 
               // Station selector
               DropdownButtonFormField<String>(
-                value: _selectedStationId.isNotEmpty ? _selectedStationId : null,
+                initialValue: _selectedStationId.isNotEmpty ? _selectedStationId : null,
                 isExpanded: true,
                 decoration: const InputDecoration(
                   labelText: 'Estación',
@@ -173,7 +173,7 @@ class _ChartsPageState extends State<ChartsPage> {
                 children: [
                   Expanded(
                     child: DropdownButtonFormField<String>(
-                      value: _selectedPeriod,
+                      initialValue: _selectedPeriod,
                       isExpanded: true,
                       decoration: const InputDecoration(
                         labelText: 'Período',
@@ -206,7 +206,7 @@ class _ChartsPageState extends State<ChartsPage> {
                   const SizedBox(width: 12),
                   Expanded(
                     child: DropdownButtonFormField<String>(
-                      value: _selectedParameter,
+                      initialValue: _selectedParameter,
                       isExpanded: true,
                       decoration: const InputDecoration(
                         labelText: 'Parámetro',
