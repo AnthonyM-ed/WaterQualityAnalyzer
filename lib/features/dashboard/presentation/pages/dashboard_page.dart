@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import '../../../../core/themes/app_theme.dart';
+import '../../../../shared/data/services/csv_data_service.dart';
 import '../../../../shared/data/services/simulated_data_service.dart';
 import '../../../../shared/domain/domain.dart';
+import '../../../auth/data/repositories/auth_repository.dart';
+import '../../../charts/presentation/charts_page.dart';
+import '../../../maps/presentation/map_page.dart';
+import '../../../settings/presentation/settings_page.dart';
+import 'station_detail_page.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -15,6 +21,7 @@ class _DashboardPageState extends State<DashboardPage> {
   List<WaterStation> _stations = [];
   Map<String, WaterQualityReading> _currentReadings = {};
   bool _isLoading = true;
+  bool _isLoggedIn = false;
 
   @override
   void initState() {
@@ -27,21 +34,30 @@ class _DashboardPageState extends State<DashboardPage> {
       _isLoading = true;
     });
 
-    // Simulate loading delay
-    await Future.delayed(const Duration(seconds: 1));
+    // Check if user is logged in
+    final isLoggedIn = await AuthRepository.isLoggedIn();
 
-    // Generate simulated data
+    // Load stations
     final stations = SimulatedDataService.createDefaultStations();
     final readings = <String, WaterQualityReading>{};
 
+    // Get latest readings from CSV for each station
     for (final station in stations) {
-      readings[station.id] = SimulatedDataService.generateReading(station.id);
+      final stationReadings = await CsvDataService.getStationReadings(station.id);
+      if (stationReadings.isNotEmpty) {
+        // Use the most recent reading
+        readings[station.id] = stationReadings.last;
+      } else {
+        // Fallback to simulated data if no CSV data
+        readings[station.id] = SimulatedDataService.generateReading(station.id);
+      }
     }
 
     setState(() {
       _stations = stations;
       _currentReadings = readings;
       _isLoading = false;
+      _isLoggedIn = isLoggedIn;
     });
   }
 
@@ -88,10 +104,6 @@ class _DashboardPageState extends State<DashboardPage> {
             label: 'Gráficos',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.warning_amber),
-            label: 'Alertas',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.map),
             label: 'Mapa',
           ),
@@ -109,13 +121,15 @@ class _DashboardPageState extends State<DashboardPage> {
       case 0:
         return _buildDashboard();
       case 1:
-        return _buildPlaceholder('Gráficos', Icons.show_chart);
+        return const ChartsPage();
       case 2:
-        return _buildPlaceholder('Alertas', Icons.warning_amber);
+        return const MapPage();
       case 3:
-        return _buildPlaceholder('Mapa', Icons.map);
-      case 4:
-        return _buildPlaceholder('Configuración', Icons.settings);
+        if (_isLoggedIn) {
+          return const SettingsPage();
+        } else {
+          return _buildLoginRequired();
+        }
       default:
         return _buildDashboard();
     }
@@ -277,96 +291,13 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  Widget _buildPlaceholder(String title, IconData icon) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            size: 64,
-            color: Colors.grey[400],
-          ),
-          const SizedBox(height: 16),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 24,
-              color: Colors.grey[600],
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Próximamente',
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.grey[500],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   void _showStationDetails(WaterStation station, WaterQualityReading? reading) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) => DraggableScrollableSheet(
-        initialChildSize: 0.7,
-        maxChildSize: 0.9,
-        minChildSize: 0.5,
-        builder: (context, scrollController) => Container(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      station.name,
-                      style: AppTheme.subHeadingStyle,
-                    ),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              if (reading != null) ...[
-                Text(
-                  'Parámetros Actuales',
-                  style: AppTheme.bodyStyle.copyWith(fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 12),
-                Expanded(
-                  child: ListView(
-                    controller: scrollController,
-                    children: reading.parameters.entries.map((entry) {
-                      return _buildParameterTile(entry.key, entry.value);
-                    }).toList(),
-                  ),
-                ),
-              ],
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildParameterTile(String parameter, double value) {
-    return ListTile(
-      title: Text(_getParameterDisplayName(parameter)),
-      subtitle: Text(_getParameterUnit(parameter)),
-      trailing: Text(
-        value.toStringAsFixed(2),
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => StationDetailPage(
+          station: station,
+          latestReading: reading,
         ),
       ),
     );
@@ -424,41 +355,60 @@ class _DashboardPageState extends State<DashboardPage> {
     }
   }
 
-  String _getParameterDisplayName(String parameter) {
-    switch (parameter) {
-      case 'pH':
-        return 'pH';
-      case 'dissolved_oxygen':
-        return 'Oxígeno Disuelto';
-      case 'temperature':
-        return 'Temperatura';
-      case 'turbidity':
-        return 'Turbidez';
-      case 'conductivity':
-        return 'Conductividad';
-      case 'ammonia':
-        return 'Amoníaco';
-      case 'nitrites':
-        return 'Nitritos';
-      case 'nitrates':
-        return 'Nitratos';
-      default:
-        return parameter;
-    }
+  Widget _buildLoginRequired() {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(32.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.lock_outline,
+              size: 80,
+              color: Colors.grey[400],
+            ),
+            const SizedBox(height: 24),
+            Text(
+              'Configuración no disponible',
+              style: AppTheme.headingStyle.copyWith(fontSize: 20),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 12),
+            Text(
+              'Debes iniciar sesión con una cuenta registrada para acceder a la configuración',
+              style: AppTheme.bodyStyle.copyWith(color: Colors.grey[600]),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 32),
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  '/login',
+                  (route) => false,
+                );
+              },
+              icon: const Icon(Icons.login),
+              label: const Text('Iniciar Sesión'),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 16,
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  _selectedIndex = 0;
+                });
+              },
+              child: const Text('Volver al Dashboard'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
-  String _getParameterUnit(String parameter) {
-    switch (parameter) {
-      case 'pH':
-        return 'pH';
-      case 'temperature':
-        return '°C';
-      case 'turbidity':
-        return 'NTU';
-      case 'conductivity':
-        return 'µS/cm';
-      default:
-        return 'mg/L';
-    }
-  }
 }

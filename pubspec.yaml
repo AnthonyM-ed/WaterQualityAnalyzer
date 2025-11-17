@@ -18,6 +18,7 @@ dependencies:
   # State Management
   flutter_bloc: ^8.1.6
   equatable: ^2.0.5
+  provider: ^6.1.1
   
   # Data & Storage
   sqflite: ^2.3.3+1
@@ -31,11 +32,11 @@ dependencies:
   google_sign_in: ^6.2.1
   
   # Charts & Analytics
-  fl_chart: ^0.68.0
-  syncfusion_flutter_charts: ^26.2.14
+  fl_chart: ^0.69.0
   
   # Maps
-  google_maps_flutter: ^2.7.0
+  flutter_map: ^8.2.2
+  latlong2: ^0.9.1
   geolocator: ^12.0.0
   geocoding: ^3.0.0
   

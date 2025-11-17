@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'core/themes/app_theme.dart';
+import 'core/providers/theme_provider.dart';
 import 'features/auth/presentation/pages/login_page.dart';
+import 'features/auth/data/repositories/auth_repository.dart';
 import 'features/dashboard/presentation/pages/dashboard_page.dart';
+import 'features/settings/presentation/settings_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,18 +23,25 @@ class WaterQualityApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Monitor de Agua Arequipa',
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
-      home: const SplashScreen(),
-      routes: {
-        '/login': (context) => const LoginPage(),
-        '/dashboard': (context) => const DashboardPage(),
-        // Add more routes as needed
-      },
+    return ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, child) {
+          return MaterialApp(
+            title: 'Monitor Río Acarí',
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: themeProvider.themeMode,
+            home: const SplashScreen(),
+            routes: {
+              '/login': (context) => const LoginPage(),
+              '/dashboard': (context) => const DashboardPage(),
+              '/settings': (context) => const SettingsPage(),
+            },
+          );
+        },
+      ),
     );
   }
 }
@@ -54,9 +65,14 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(const Duration(seconds: 2));
     
     if (mounted) {
-      // For now, always navigate to login
-      // In a real app, you would check authentication status
-      Navigator.of(context).pushReplacementNamed('/login');
+      // Check if user is logged in
+      final isLoggedIn = await AuthRepository.isLoggedIn();
+      
+      if (isLoggedIn) {
+        Navigator.of(context).pushReplacementNamed('/dashboard');
+      } else {
+        Navigator.of(context).pushReplacementNamed('/login');
+      }
     }
   }
 
@@ -90,7 +106,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             const SizedBox(height: 24),
             const Text(
-              'Monitor de Agua Arequipa',
+              'Monitor Río Acarí',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
@@ -99,7 +115,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             const SizedBox(height: 8),
             const Text(
-              'Agua segura para pueblos jóvenes',
+              'Cuenca Río Acarí - Caravelí',
               style: TextStyle(
                 color: Colors.white70,
                 fontSize: 16,

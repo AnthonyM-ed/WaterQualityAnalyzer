@@ -45,6 +45,10 @@ class SimulatedDataService {
         // Out of range (critical alert for informal settlements)
         if (_random.nextBool()) {
           value = standards['min']! - _random.nextDouble() * 2;
+          // Ensure chlorine_residual is never negative
+          if (parameter == 'chlorine_residual' && value < 0) {
+            value = 0.1; // Minimum realistic value
+          }
           alerts.add('$parameter por debajo del límite mínimo - PELIGROSO PARA CONSUMO');
         } else {
           value = standards['max']! + _random.nextDouble() * 2;
@@ -158,7 +162,7 @@ class SimulatedDataService {
         ),
         sensorIds: _generateSensorIds(stationData['id']),
         metadata: StationMetadata(
-          elevation: 2300 + _random.nextDouble() * 500, // Arequipa altitude
+          elevation: stationData['elevation'] ?? 420.0, // Usar elevación de la estación
           department: 'Arequipa',
           municipality: _getMunicipalityFromName(stationData['name']),
           waterBodyType: _getWaterBodyType(stationData['name']),

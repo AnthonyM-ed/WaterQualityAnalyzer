@@ -1,39 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../../../../core/themes/app_theme.dart';
 import '../../data/repositories/auth_repository.dart';
-import 'register_page.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
+  final _dniController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
   bool _isLoading = false;
   bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
 
   @override
   void dispose() {
+    _nameController.dispose();
     _emailController.dispose();
+    _dniController.dispose();
     _passwordController.dispose();
+    _confirmPasswordController.dispose();
     super.dispose();
   }
 
-  void _handleLogin() async {
+  void _handleRegister() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
       });
 
       try {
-        // Login with AuthRepository
-        await AuthRepository.login(
+        // Register the user
+        await AuthRepository.register(
+          name: _nameController.text.trim(),
           email: _emailController.text.trim(),
+          dni: _dniController.text.trim(),
           password: _passwordController.text,
         );
 
@@ -41,9 +50,17 @@ class _LoginPageState extends State<LoginPage> {
           setState(() {
             _isLoading = false;
           });
-          
-          // Navigate to dashboard
-          Navigator.of(context).pushReplacementNamed('/dashboard');
+
+          // Show success message
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Cuenta creada exitosamente'),
+              backgroundColor: Colors.green,
+            ),
+          );
+
+          // Navigate to login
+          Navigator.of(context).pop();
         }
       } catch (e) {
         if (mounted) {
@@ -53,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
 
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(e.toString().replaceAll('Exception: ', '')),
+              content: Text(e.toString()),
               backgroundColor: Colors.red,
             ),
           );
@@ -66,6 +83,14 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[50],
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black87),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -95,18 +120,38 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 24),
                   
                   const Text(
-                    'Monitor Río Acarí',
+                    'Crear Cuenta',
                     style: AppTheme.headingStyle,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8),
                   
                   Text(
-                    'Cuenca del río Acarí - Caravelí, Arequipa',
+                    'Registra tu cuenta para monitorear la calidad del agua',
                     style: AppTheme.bodyStyle.copyWith(color: Colors.grey[600]),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 48),
+                  const SizedBox(height: 32),
+                  
+                  // Name field
+                  TextFormField(
+                    controller: _nameController,
+                    textCapitalization: TextCapitalization.words,
+                    decoration: const InputDecoration(
+                      labelText: 'Nombre completo',
+                      prefixIcon: Icon(Icons.person_outlined),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Por favor ingresa tu nombre completo';
+                      }
+                      if (value.length < 3) {
+                        return 'El nombre debe tener al menos 3 caracteres';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16),
                   
                   // Email field
                   TextFormField(
@@ -128,6 +173,31 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 16),
                   
+                  // DNI field
+                  TextFormField(
+                    controller: _dniController,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(8),
+                    ],
+                    decoration: const InputDecoration(
+                      labelText: 'DNI',
+                      prefixIcon: Icon(Icons.badge_outlined),
+                      helperText: '8 dígitos',
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Por favor ingresa tu DNI';
+                      }
+                      if (value.length != 8) {
+                        return 'El DNI debe tener 8 dígitos';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  
                   // Password field
                   TextFormField(
                     controller: _passwordController,
@@ -135,6 +205,7 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: InputDecoration(
                       labelText: 'Contraseña',
                       prefixIcon: const Icon(Icons.lock_outlined),
+                      helperText: 'Mínimo 6 caracteres',
                       suffixIcon: IconButton(
                         icon: Icon(
                           _obscurePassword
@@ -150,7 +221,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Por favor ingresa tu contraseña';
+                        return 'Por favor ingresa una contraseña';
                       }
                       if (value.length < 6) {
                         return 'La contraseña debe tener al menos 6 caracteres';
@@ -158,11 +229,43 @@ class _LoginPageState extends State<LoginPage> {
                       return null;
                     },
                   ),
+                  const SizedBox(height: 16),
+                  
+                  // Confirm password field
+                  TextFormField(
+                    controller: _confirmPasswordController,
+                    obscureText: _obscureConfirmPassword,
+                    decoration: InputDecoration(
+                      labelText: 'Confirmar contraseña',
+                      prefixIcon: const Icon(Icons.lock_outlined),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscureConfirmPassword
+                              ? Icons.visibility_outlined
+                              : Icons.visibility_off_outlined,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscureConfirmPassword = !_obscureConfirmPassword;
+                          });
+                        },
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Por favor confirma tu contraseña';
+                      }
+                      if (value != _passwordController.text) {
+                        return 'Las contraseñas no coinciden';
+                      }
+                      return null;
+                    },
+                  ),
                   const SizedBox(height: 24),
                   
-                  // Login button
+                  // Register button
                   ElevatedButton(
-                    onPressed: _isLoading ? null : _handleLogin,
+                    onPressed: _isLoading ? null : _handleRegister,
                     child: _isLoading
                         ? const SizedBox(
                             height: 20,
@@ -172,63 +275,20 @@ class _LoginPageState extends State<LoginPage> {
                               valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                             ),
                           )
-                        : const Text('Iniciar Sesión'),
+                        : const Text('Registrarse'),
                   ),
                   const SizedBox(height: 16),
                   
-                  // Forgot password
-                  TextButton(
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Funcionalidad de recuperación de contraseña próximamente'),
-                        ),
-                      );
-                    },
-                    child: const Text('¿Olvidaste tu contraseña?'),
-                  ),
-                  const SizedBox(height: 32),
-                  
-                  // Divider
-                  Row(
-                    children: [
-                      Expanded(child: Divider(color: Colors.grey[400])),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Text(
-                          'O',
-                          style: TextStyle(color: Colors.grey[600]),
-                        ),
-                      ),
-                      Expanded(child: Divider(color: Colors.grey[400])),
-                    ],
-                  ),
-                  const SizedBox(height: 32),
-                  
-                  // Demo access button
-                  OutlinedButton.icon(
-                    onPressed: () {
-                      Navigator.of(context).pushReplacementNamed('/dashboard');
-                    },
-                    icon: const Icon(Icons.preview),
-                    label: const Text('Acceso Demo'),
-                  ),
-                  const SizedBox(height: 16),
-                  
-                  // Register link
+                  // Login link
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('¿No tienes cuenta?'),
+                      const Text('¿Ya tienes cuenta?'),
                       TextButton(
                         onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const RegisterPage(),
-                            ),
-                          );
+                          Navigator.of(context).pop();
                         },
-                        child: const Text('Regístrate'),
+                        child: const Text('Inicia Sesión'),
                       ),
                     ],
                   ),
