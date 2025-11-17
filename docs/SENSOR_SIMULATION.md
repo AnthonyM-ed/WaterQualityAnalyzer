@@ -1,6 +1,6 @@
 # Simulación de Sensores IoT - Water Quality Analyzer
 
-## 🎯 Objetivo
+## Objetivo
 
 Simular completamente el flujo de un sistema IoT de monitoreo de calidad de agua sin necesidad de hardware real, replicando el comportamiento de:
 - Sensores ESP32/Arduino
@@ -8,7 +8,7 @@ Simular completamente el flujo de un sistema IoT de monitoreo de calidad de agua
 - Base de datos Firebase/Firestore
 - Actualizaciones en tiempo real
 
-## 📡 Arquitectura Simulada
+## Arquitectura Simulada
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -25,17 +25,17 @@ Simular completamente el flujo de un sistema IoT de monitoreo de calidad de agua
 └─────────────────────────────────────────────────────────┘
 ```
 
-## 🔧 Componentes
+## Componentes
 
 ### 1. **SensorSimulatorService** 
 Ubicación: `lib/shared/data/services/sensor_simulator_service.dart`
 
 **Función:** Simula 3 sensores IoT (CA-08, CA-09, CA-10) que:
-- ✅ Generan lecturas cada 30 segundos
-- ✅ Tienen variaciones realistas (drift de sensores)
-- ✅ Pueden fallar o desconectarse
-- ✅ Generan anomalías aleatorias (10% de probabilidad)
-- ✅ Calculan índice de calidad y alertas
+- Generan lecturas cada 30 segundos
+- Tienen variaciones realistas (drift de sensores)
+- Pueden fallar o desconectarse
+- Generan anomalías aleatorias (10% de probabilidad)
+- Calculan índice de calidad y alertas
 
 **Eventos simulados:**
 - pH spikes (descargas químicas)
@@ -77,7 +77,7 @@ Ubicación: `lib/features/dashboard/presentation/pages/dashboard_page.dart`
 🟢 En vivo (actualiza cada 30s)  ← Modo tiempo real activo
 ```
 
-## 📋 Flujo de Datos Simulado
+## Flujo de Datos Simulado
 
 ### Modo Tiempo Real (Sensores IoT Simulados)
 
@@ -112,7 +112,7 @@ Ubicación: `lib/features/dashboard/presentation/pages/dashboard_page.dart`
 4. Usuario presiona "Refresh" para recargar
 ```
 
-## 🎮 Cómo Usar
+## Cómo Usar
 
 ### 1. Activar Simulación Tiempo Real
 
@@ -141,7 +141,7 @@ _sensorSimulator.setSensorStatus('CA-10', false);
 _sensorSimulator.setSensorStatus('CA-10', true);
 ```
 
-## 📊 Datos Generados
+## Datos Generados
 
 ### Parámetros Monitoreados:
 - **pH:** 5.0 - 11.5 (LMP: 6.5 - 8.5)
@@ -156,7 +156,7 @@ _sensorSimulator.setSensorStatus('CA-10', true);
 - **CA-09** (Pueblo): Calidad media, TDS ~170 ppm
 - **CA-10** (Zona Baja): Peor calidad, TDS ~1650 ppm
 
-## 🔔 Sistema de Alertas
+## Sistema de Alertas
 
 Cuando un parámetro excede el LMP:
 1. Se genera alerta en el reading
@@ -164,18 +164,18 @@ Cuando un parámetro excede el LMP:
 3. Usuario puede presionar "Ver" para ir a detalle
 4. Alerta se muestra en el card de la estación
 
-## 🚀 Ventajas de la Simulación
+## Ventajas de la Simulación
 
-✅ **No requiere hardware:** Funciona sin sensores físicos
-✅ **Testing realista:** Comportamiento similar a sensores reales
-✅ **Debugging fácil:** Logs detallados de cada evento
-✅ **Demo convincente:** Actualización en tiempo real visible
-✅ **Escalable:** Fácil agregar más estaciones
-✅ **Educativo:** Perfecto para tesis/presentaciones
+**No requiere hardware:** Funciona sin sensores físicos
+**Testing realista:** Comportamiento similar a sensores reales
+**Debugging fácil:** Logs detallados de cada evento
+**Demo convincente:** Actualización en tiempo real visible
+**Escalable:** Fácil agregar más estaciones
+**Educativo:** Perfecto para tesis/presentaciones
 
-## 🔄 Migración a Hardware Real
+## Migración a Hardware Real
 
-Cuando tengas sensores físicos, solo necesitas:
+Cuando se tenga sensores físicos, solo necesitas:
 
 ### 1. MQTT Real (HiveMQ/Mosquitto)
 
@@ -204,7 +204,7 @@ ref.onValue.listen((event) {
 });
 ```
 
-## 📝 Logs de Ejemplo
+## Logs de Ejemplo
 
 ```
 🔌 Starting IoT sensor simulation...
@@ -216,15 +216,5 @@ ref.onValue.listen((event) {
 ⚠️ [CA-10] ANOMALY: TDS spike!
 📊 CA-10: pH=7.12, TDS=2527, Turbidez=3.5
 ```
-
-## 🎓 Para Tesis/Presentación
-
-Puedes explicar:
-1. "La app simula 3 sensores ESP32 en la cuenca del Acarí"
-2. "Los datos se actualizan cada 30 segundos como sensores reales"
-3. "El sistema detecta anomalías y genera alertas automáticas"
-4. "En producción, esto se conectaría a MQTT y Firebase"
-
----
 
 **Nota:** El CSV (`arequipa_water_data.csv`) sigue disponible para análisis histórico y gráficos de tendencias. El modo tiempo real es para demostración del flujo IoT.
