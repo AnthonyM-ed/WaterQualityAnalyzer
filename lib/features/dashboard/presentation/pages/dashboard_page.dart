@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/themes/app_theme.dart';
 import '../../../../shared/data/services/csv_data_service.dart';
+import '../../../../shared/data/services/firebase_data_service.dart';
 import '../../../../shared/data/services/simulated_data_service.dart';
 import '../../../../shared/data/services/sensor_simulator_service.dart';
 import '../../../../shared/domain/domain.dart';
@@ -25,6 +26,7 @@ class _DashboardPageState extends State<DashboardPage> {
   bool _isLoggedIn = false;
   bool _useRealtimeSimulation = true; // Toggle between CSV and realtime
   final _sensorSimulator = SensorSimulatorService();
+  final _firebaseData = FirebaseDataService();
 
   @override
   void initState() {
@@ -45,8 +47,6 @@ class _DashboardPageState extends State<DashboardPage> {
 
   /// Start real-time sensor simulation (mimics MQTT/Firebase)
   Future<void> _startRealtimeUpdates() async {
-    print('🚀 Starting real-time sensor simulation...');
-    
     // Subscribe to sensor updates
     _sensorSimulator.subscribe(_onSensorData);
     
@@ -119,18 +119,30 @@ class _DashboardPageState extends State<DashboardPage> {
         if (_currentReadings.containsKey(station.id)) {
           readings[station.id] = _currentReadings[station.id]!;
         } else {
-          // Generate initial reading
-          readings[station.id] = SimulatedDataService.generateReading(station.id);
+          // Try Firebase first, then fallback
+          final firebaseReading = await _firebaseData.getLatestReading(station.id);
+          if (firebaseReading != null) {
+            readings[station.id] = firebaseReading;
+          } else {
+            // Generate initial reading
+            readings[station.id] = SimulatedDataService.generateReading(station.id);
+          }
         }
       }
     } else {
-      // Use CSV data (historical mode)
+      // Historical mode: Try Firebase first, then CSV fallback
       for (final station in stations) {
-        final stationReadings = await CsvDataService.getStationReadings(station.id);
-        if (stationReadings.isNotEmpty) {
-          readings[station.id] = stationReadings.last;
+        final firebaseReading = await FirebaseDataService().getLatestReading(station.id);
+        if (firebaseReading != null) {
+          readings[station.id] = firebaseReading;
         } else {
-          readings[station.id] = SimulatedDataService.generateReading(station.id);
+          // Fallback: usar CSV si no hay datos en Firebase
+          final stationReadings = await CsvDataService.getStationReadings(station.id);
+          if (stationReadings.isNotEmpty) {
+            readings[station.id] = stationReadings.last;
+          } else {
+            readings[station.id] = SimulatedDataService.generateReading(station.id);
+          }
         }
       }
     }
@@ -197,14 +209,6 @@ class _DashboardPageState extends State<DashboardPage> {
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: _loadData,
-          ),
-          IconButton(
-            icon: const Icon(Icons.notifications_outlined),
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Notificaciones próximamente')),
-              );
-            },
           ),
         ],
       ),

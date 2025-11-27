@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "822709354560",
+    "firebase_url": "https://water-quality-db-630a8-default-rtdb.firebaseio.com",
+    "project_id": "water-quality-db-630a8",
+    "storage_bucket": "water-quality-db-630a8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822709354560:android:6eb1bec43bcf0f8f5e9fa5",
+        "android_client_info": {
+          "package_name": "com.example.water_quality"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCU5HcUhZuWoSvos7N52b5BM2mvfWE1akc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

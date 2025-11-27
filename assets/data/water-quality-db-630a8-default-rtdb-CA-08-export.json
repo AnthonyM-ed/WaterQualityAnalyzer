@@ -1,0 +1,1907 @@
+{
+  "1724155200000": {
+    "alerts": [
+      "chlorine_residual por debajo del límite mínimo (0.20)"
+    ],
+    "id": "reading_CA-08_1724155200000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 0.2,
+      "pH": 7.65,
+      "tds": 198,
+      "turbidity": 1.1
+    },
+    "qualityIndex": 78.6875,
+    "stationId": "CA-08",
+    "timestamp": "2024-08-20T12:00:00.000Z"
+  },
+  "1724414400000": {
+    "alerts": [
+      "pH por debajo del límite mínimo (5.85)",
+      "chlorine_residual por debajo del límite mínimo (0.00)"
+    ],
+    "id": "reading_CA-08_1724414400000",
+    "overallStatus": "moderate",
+    "parameters": {
+      "chlorine_residual": 0,
+      "pH": 5.85,
+      "tds": 312,
+      "turbidity": 2.8
+    },
+    "qualityIndex": 57.875,
+    "stationId": "CA-08",
+    "timestamp": "2024-08-23T12:00:00.000Z"
+  },
+  "1724673600000": {
+    "alerts": [
+      "chlorine_residual por debajo del límite mínimo (0.20)"
+    ],
+    "id": "reading_CA-08_1724673600000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 0.2,
+      "pH": 7.92,
+      "tds": 215,
+      "turbidity": 1.5
+    },
+    "qualityIndex": 75.9125,
+    "stationId": "CA-08",
+    "timestamp": "2024-08-26T12:00:00.000Z"
+  },
+  "1724932800000": {
+    "alerts": [
+      "chlorine_residual por debajo del límite mínimo (0.20)"
+    ],
+    "id": "reading_CA-08_1724932800000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 0.2,
+      "pH": 7.55,
+      "tds": 228,
+      "turbidity": 1.3
+    },
+    "qualityIndex": 79.0625,
+    "stationId": "CA-08",
+    "timestamp": "2024-08-29T12:00:00.000Z"
+  },
+  "1725278400000": {
+    "alerts": [
+      "pH por encima del límite máximo (11.25)"
+    ],
+    "id": "reading_CA-08_1725278400000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 1.8,
+      "pH": 11.25,
+      "tds": 95,
+      "turbidity": 0.6
+    },
+    "qualityIndex": 78.40126050420169,
+    "stationId": "CA-08",
+    "timestamp": "2024-09-02T12:00:00.000Z"
+  },
+  "1725537600000": {
+    "alerts": [
+      "chlorine_residual por debajo del límite mínimo (0.30)"
+    ],
+    "id": "reading_CA-08_1725537600000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 0.3,
+      "pH": 7.48,
+      "tds": 218,
+      "turbidity": 1
+    },
+    "qualityIndex": 82.5,
+    "stationId": "CA-08",
+    "timestamp": "2024-09-05T12:00:00.000Z"
+  },
+  "1725883200000": {
+    "alerts": [
+      "chlorine_residual por debajo del límite mínimo (0.30)"
+    ],
+    "id": "reading_CA-08_1725883200000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 0.3,
+      "pH": 7.72,
+      "tds": 205,
+      "turbidity": 0.9
+    },
+    "qualityIndex": 80.85,
+    "stationId": "CA-08",
+    "timestamp": "2024-09-09T12:00:00.000Z"
+  },
+  "1726142400000": {
+    "alerts": [
+      "chlorine_residual por debajo del límite mínimo (0.20)"
+    ],
+    "id": "reading_CA-08_1726142400000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 0.2,
+      "pH": 7.38,
+      "tds": 235,
+      "turbidity": 1.3
+    },
+    "qualityIndex": 79.4375,
+    "stationId": "CA-08",
+    "timestamp": "2024-09-12T12:00:00.000Z"
+  },
+  "1726488000000": {
+    "alerts": [
+      "chlorine_residual por debajo del límite mínimo (0.30)"
+    ],
+    "id": "reading_CA-08_1726488000000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 0.3,
+      "pH": 7.68,
+      "tds": 198,
+      "turbidity": 1
+    },
+    "qualityIndex": 81.15,
+    "stationId": "CA-08",
+    "timestamp": "2024-09-16T12:00:00.000Z"
+  },
+  "1726747200000": {
+    "alerts": [
+      "pH por debajo del límite mínimo (6.15)",
+      "chlorine_residual por debajo del límite mínimo (0.00)"
+    ],
+    "id": "reading_CA-08_1726747200000",
+    "overallStatus": "moderate",
+    "parameters": {
+      "chlorine_residual": 0,
+      "pH": 6.15,
+      "tds": 385,
+      "turbidity": 4.2
+    },
+    "qualityIndex": 55.82692307692308,
+    "stationId": "CA-08",
+    "timestamp": "2024-09-19T12:00:00.000Z"
+  },
+  "1727092800000": {
+    "alerts": [
+      "chlorine_residual por debajo del límite mínimo (0.40)"
+    ],
+    "id": "reading_CA-08_1727092800000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 0.4,
+      "pH": 7.85,
+      "tds": 188,
+      "turbidity": 1.1
+    },
+    "qualityIndex": 82.1875,
+    "stationId": "CA-08",
+    "timestamp": "2024-09-23T12:00:00.000Z"
+  },
+  "1727438400000": {
+    "alerts": [
+      "chlorine_residual por debajo del límite mínimo (0.30)"
+    ],
+    "id": "reading_CA-08_1727438400000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 0.3,
+      "pH": 7.62,
+      "tds": 208,
+      "turbidity": 1.2
+    },
+    "qualityIndex": 81.225,
+    "stationId": "CA-08",
+    "timestamp": "2024-09-27T12:00:00.000Z"
+  },
+  "1727784000000": {
+    "alerts": [
+      "chlorine_residual por debajo del límite mínimo (0.20)"
+    ],
+    "id": "reading_CA-08_1727784000000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 0.2,
+      "pH": 7.55,
+      "tds": 222,
+      "turbidity": 1.3
+    },
+    "qualityIndex": 79.0625,
+    "stationId": "CA-08",
+    "timestamp": "2024-10-01T12:00:00.000Z"
+  },
+  "1728043200000": {
+    "alerts": [
+      "pH por encima del límite máximo (10.85)"
+    ],
+    "id": "reading_CA-08_1728043200000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 1.5,
+      "pH": 10.85,
+      "tds": 108,
+      "turbidity": 0.7
+    },
+    "qualityIndex": 78.45588235294117,
+    "stationId": "CA-08",
+    "timestamp": "2024-10-04T12:00:00.000Z"
+  },
+  "1728388800000": {
+    "alerts": [
+      "chlorine_residual por debajo del límite mínimo (0.30)"
+    ],
+    "id": "reading_CA-08_1728388800000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 0.3,
+      "pH": 7.72,
+      "tds": 195,
+      "turbidity": 1.1
+    },
+    "qualityIndex": 80.6625,
+    "stationId": "CA-08",
+    "timestamp": "2024-10-08T12:00:00.000Z"
+  },
+  "1728648000000": {
+    "alerts": [
+      "chlorine_residual por debajo del límite mínimo (0.20)"
+    ],
+    "id": "reading_CA-08_1728648000000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 0.2,
+      "pH": 7.48,
+      "tds": 218,
+      "turbidity": 1.2
+    },
+    "qualityIndex": 79.625,
+    "stationId": "CA-08",
+    "timestamp": "2024-10-11T12:00:00.000Z"
+  },
+  "1728993600000": {
+    "alerts": [
+      "chlorine_residual por debajo del límite mínimo (0.30)"
+    ],
+    "id": "reading_CA-08_1728993600000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 0.3,
+      "pH": 7.65,
+      "tds": 205,
+      "turbidity": 1.1
+    },
+    "qualityIndex": 81.1875,
+    "stationId": "CA-08",
+    "timestamp": "2024-10-15T12:00:00.000Z"
+  },
+  "1729252800000": {
+    "alerts": [
+      "chlorine_residual por debajo del límite mínimo (0.30)"
+    ],
+    "id": "reading_CA-08_1729252800000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 0.3,
+      "pH": 7.82,
+      "tds": 192,
+      "turbidity": 1
+    },
+    "qualityIndex": 80.1,
+    "stationId": "CA-08",
+    "timestamp": "2024-10-18T12:00:00.000Z"
+  },
+  "1729598400000": {
+    "alerts": [
+      "chlorine_residual por debajo del límite mínimo (0.30)"
+    ],
+    "id": "reading_CA-08_1729598400000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 0.3,
+      "pH": 7.58,
+      "tds": 212,
+      "turbidity": 1.2
+    },
+    "qualityIndex": 81.525,
+    "stationId": "CA-08",
+    "timestamp": "2024-10-22T12:00:00.000Z"
+  },
+  "1729944000000": {
+    "id": "reading_CA-08_1729944000000",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.6,
+      "pH": 8.35,
+      "tds": 158,
+      "turbidity": 1.3
+    },
+    "qualityIndex": 93.0625,
+    "stationId": "CA-08",
+    "timestamp": "2024-10-26T12:00:00.000Z"
+  },
+  "1730289600000": {
+    "alerts": [
+      "pH por encima del límite máximo (8.68)"
+    ],
+    "id": "reading_CA-08_1730289600000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 0.8,
+      "pH": 8.68,
+      "tds": 135,
+      "turbidity": 1.5
+    },
+    "qualityIndex": 74.32720588235294,
+    "stationId": "CA-08",
+    "timestamp": "2024-10-30T12:00:00.000Z"
+  },
+  "1730548800000": {
+    "alerts": [
+      "pH por debajo del límite mínimo (5.42)",
+      "turbidity por encima del límite máximo (5.50)",
+      "chlorine_residual por debajo del límite mínimo (0.00)"
+    ],
+    "id": "reading_CA-08_1730548800000",
+    "overallStatus": "poor",
+    "parameters": {
+      "chlorine_residual": 0,
+      "pH": 5.42,
+      "tds": 425,
+      "turbidity": 5.5
+    },
+    "qualityIndex": 36.67307692307692,
+    "stationId": "CA-08",
+    "timestamp": "2024-11-02T12:00:00.000Z"
+  },
+  "1730808000000": {
+    "alerts": [
+      "pH por encima del límite máximo (9.05)"
+    ],
+    "id": "reading_CA-08_1730808000000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 1,
+      "pH": 9.05,
+      "tds": 118,
+      "turbidity": 1.7
+    },
+    "qualityIndex": 74.49632352941177,
+    "stationId": "CA-08",
+    "timestamp": "2024-11-05T12:00:00.000Z"
+  },
+  "1731067200000": {
+    "alerts": [
+      "pH por encima del límite máximo (9.52)"
+    ],
+    "id": "reading_CA-08_1731067200000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 1.2,
+      "pH": 9.52,
+      "tds": 105,
+      "turbidity": 2
+    },
+    "qualityIndex": 74.625,
+    "stationId": "CA-08",
+    "timestamp": "2024-11-08T12:00:00.000Z"
+  },
+  "1731240000000": {
+    "alerts": [
+      "pH por encima del límite máximo (10.15)"
+    ],
+    "id": "reading_CA-08_1731240000000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 1.4,
+      "pH": 10.15,
+      "tds": 92,
+      "turbidity": 2.3
+    },
+    "qualityIndex": 74.98897058823529,
+    "stationId": "CA-08",
+    "timestamp": "2024-11-10T12:00:00.000Z"
+  },
+  "1731412800000": {
+    "alerts": [
+      "pH por debajo del límite mínimo (6.25)",
+      "chlorine_residual por debajo del límite mínimo (0.10)"
+    ],
+    "id": "reading_CA-08_1731412800000",
+    "overallStatus": "moderate",
+    "parameters": {
+      "chlorine_residual": 0.1,
+      "pH": 6.25,
+      "tds": 285,
+      "turbidity": 3.8
+    },
+    "qualityIndex": 59.269230769230774,
+    "stationId": "CA-08",
+    "timestamp": "2024-11-12T12:00:00.000Z"
+  },
+  "1731585600000": {
+    "alerts": [
+      "pH por encima del límite máximo (9.82)"
+    ],
+    "id": "reading_CA-08_1731585600000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 1.3,
+      "pH": 9.82,
+      "tds": 98,
+      "turbidity": 2.5
+    },
+    "qualityIndex": 74.12867647058823,
+    "stationId": "CA-08",
+    "timestamp": "2024-11-14T12:00:00.000Z"
+  },
+  "1731672000000": {
+    "alerts": [
+      "chlorine_residual por debajo del límite mínimo (0.40)"
+    ],
+    "id": "reading_CA-08_1731672000000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 0.4,
+      "pH": 7.28,
+      "tds": 178,
+      "turbidity": 2.2
+    },
+    "qualityIndex": 82.75,
+    "stationId": "CA-08",
+    "timestamp": "2024-11-15T12:00:00.000Z"
+  },
+  "1731758400000": {
+    "alerts": [
+      "pH por encima del límite máximo (10.42)"
+    ],
+    "id": "reading_CA-08_1731758400000",
+    "overallStatus": "good",
+    "parameters": {
+      "chlorine_residual": 1.5,
+      "pH": 10.42,
+      "tds": 82,
+      "turbidity": 2.8
+    },
+    "qualityIndex": 74.44852941176471,
+    "stationId": "CA-08",
+    "timestamp": "2024-11-16T12:00:00.000Z"
+  },
+  "1764203092165": {
+    "alerts": [
+      "pH excede el límite (8.69 > 8.5)"
+    ],
+    "id": "CA-08_1764203092165",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.9819487289655495,
+      "pH": 8.694088833510284,
+      "tds": 147.8720288312359,
+      "turbidity": 2.9183728223006113
+    },
+    "qualityIndex": 99.44189426509483,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:24:52.165775"
+  },
+  "1764203122250": {
+    "id": "CA-08_1764203122250",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.034102548720926,
+      "pH": 8.41651800491888,
+      "tds": 178.70459196941113,
+      "turbidity": 2.6986666015153538
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:25:22.250372"
+  },
+  "1764203152282": {
+    "id": "CA-08_1764203152282",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.0077278639569127,
+      "pH": 8.235387574908028,
+      "tds": 169.45195978971088,
+      "turbidity": 2.240874981016855
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:25:52.282221"
+  },
+  "1764203182249": {
+    "id": "CA-08_1764203182249",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.9410383174938245,
+      "pH": 7.961495360627063,
+      "tds": 120.2939131829923,
+      "turbidity": 1.875695027020015
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:26:22.249871"
+  },
+  "1764203212249": {
+    "id": "CA-08_1764203212249",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.0659088980868585,
+      "pH": 7.725427553457256,
+      "tds": 135.4681757908008,
+      "turbidity": 1.7659336706405793
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:26:52.249259"
+  },
+  "1764203242249": {
+    "id": "CA-08_1764203242249",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.0233745055892722,
+      "pH": 7.849467667873824,
+      "tds": 114.12715573578832,
+      "turbidity": 1.9744975912800453
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:27:22.249707"
+  },
+  "1764203272249": {
+    "id": "CA-08_1764203272249",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.1183705307370826,
+      "pH": 8.107846545967716,
+      "tds": 67.37292743793418,
+      "turbidity": 2.4355200012839493
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:27:52.249447"
+  },
+  "1764203302249": {
+    "id": "CA-08_1764203302249",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.3073714029197256,
+      "pH": 7.908186454829897,
+      "tds": 57.748689177124064,
+      "turbidity": 2.473238262350716
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:28:22.249509"
+  },
+  "1764203332386": {
+    "id": "CA-08_1764203332386",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.2794921504486005,
+      "pH": 7.608773303684409,
+      "tds": 50,
+      "turbidity": 2.556296786667191
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:28:52.386910"
+  },
+  "1764203362249": {
+    "id": "CA-08_1764203362249",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.2958453511335906,
+      "pH": 7.707581618495215,
+      "tds": 50,
+      "turbidity": 2.566965085626058
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:29:22.249813"
+  },
+  "1764203392249": {
+    "id": "CA-08_1764203392249",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.3250715908650113,
+      "pH": 7.481281322786392,
+      "tds": 50,
+      "turbidity": 2.223118488339265
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:29:52.249736"
+  },
+  "1764203422249": {
+    "id": "CA-08_1764203422249",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.3422769711783067,
+      "pH": 7.241677451770132,
+      "tds": 50,
+      "turbidity": 2.277628078905896
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:30:22.249598"
+  },
+  "1764203452249": {
+    "id": "CA-08_1764203452249",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.2666224106458688,
+      "pH": 6.96798585382325,
+      "tds": 50.050083245754415,
+      "turbidity": 2.0684323671328264
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:30:52.249606"
+  },
+  "1764203482249": {
+    "id": "CA-08_1764203482249",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.3144458664287644,
+      "pH": 7.235457020302421,
+      "tds": 80.55517842331909,
+      "turbidity": 2.532065590904739
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:31:22.249809"
+  },
+  "1764203512249": {
+    "id": "CA-08_1764203512249",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.3684500312445116,
+      "pH": 7.439439209776511,
+      "tds": 74.28717226574378,
+      "turbidity": 2.3305806987263757
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:31:52.249560"
+  },
+  "1764203542249": {
+    "id": "CA-08_1764203542249",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.3522568110258202,
+      "pH": 7.601488243519392,
+      "tds": 107.47561838766597,
+      "turbidity": 1.8771804783085093
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:32:22.249926"
+  },
+  "1764203572250": {
+    "id": "CA-08_1764203572250",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.4005628736858728,
+      "pH": 7.789000889654536,
+      "tds": 128.46811693816457,
+      "turbidity": 2.1781428484688177
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:32:52.250073"
+  },
+  "1764203602249": {
+    "id": "CA-08_1764203602249",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.2524348523848055,
+      "pH": 7.549807494782042,
+      "tds": 148.1429358494444,
+      "turbidity": 2.511406653732124
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:33:22.249994"
+  },
+  "1764203632249": {
+    "id": "CA-08_1764203632249",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.063041760572406,
+      "pH": 7.252717191964546,
+      "tds": 143.6533941470835,
+      "turbidity": 2.457356865189217
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:33:52.249414"
+  },
+  "1764203662249": {
+    "id": "CA-08_1764203662249",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.0672540725040045,
+      "pH": 7.4736040424332595,
+      "tds": 124.70102879889137,
+      "turbidity": 2.604907770421174
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:34:22.249892"
+  },
+  "1764203692250": {
+    "id": "CA-08_1764203692250",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.1981996195700053,
+      "pH": 7.29824980739225,
+      "tds": 155.9920215162882,
+      "turbidity": 2.8251450544905454
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:34:52.250071"
+  },
+  "1764203718578": {
+    "alerts": [
+      "pH excede el límite (8.90 > 8.5)"
+    ],
+    "id": "CA-08_1764203718578",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.9412207120155082,
+      "pH": 8.895509949237335,
+      "tds": 147.43549440871516,
+      "turbidity": 2.927800452596147
+    },
+    "qualityIndex": 98.88845622259339,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:35:18.578320"
+  },
+  "1764203748620": {
+    "alerts": [
+      "pH excede el límite (8.86 > 8.5)"
+    ],
+    "id": "CA-08_1764203748620",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.096442379427026,
+      "pH": 8.861632715677416,
+      "tds": 165.10533520053278,
+      "turbidity": 2.542447056437498
+    },
+    "qualityIndex": 98.97977966566579,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:35:48.620882"
+  },
+  "1764203778620": {
+    "alerts": [
+      "pH excede el límite (8.62 > 8.5)"
+    ],
+    "id": "CA-08_1764203778620",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.0342074943565793,
+      "pH": 8.619961921466327,
+      "tds": 142.1387579931377,
+      "turbidity": 2.716419095721554
+    },
+    "qualityIndex": 99.65208105743604,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:36:18.620656"
+  },
+  "1764203808620": {
+    "alerts": [
+      "pH excede el límite (8.62 > 8.5)"
+    ],
+    "id": "CA-08_1764203808620",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.9677857183908066,
+      "pH": 8.621202687456904,
+      "tds": 139.8682575013803,
+      "turbidity": 3.0456419952483103
+    },
+    "qualityIndex": 99.64853312278215,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:36:48.620804"
+  },
+  "1764203838621": {
+    "alerts": [
+      "pH excede el límite (8.90 > 8.5)"
+    ],
+    "id": "CA-08_1764203838621",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.7859225040612107,
+      "pH": 8.898643607044354,
+      "tds": 153.1228911080654,
+      "turbidity": 3.1229422241954117
+    },
+    "qualityIndex": 98.88004390149759,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:37:18.621041"
+  },
+  "1764203868620": {
+    "alerts": [
+      "pH excede el límite (9.10 > 8.5)"
+    ],
+    "id": "CA-08_1764203868620",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.9794862221250884,
+      "pH": 9.096626498857756,
+      "tds": 152.0969398364302,
+      "turbidity": 3.103507892725216
+    },
+    "qualityIndex": 98.36030835460632,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:37:48.620941"
+  },
+  "1764203883616": {
+    "alerts": [
+      "pH excede el límite (9.28 > 8.5)"
+    ],
+    "id": "CA-08_1764203883616",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.0765614425897703,
+      "pH": 9.277658647520354,
+      "tds": 201.75145598277237,
+      "turbidity": 2.8179978419836904
+    },
+    "qualityIndex": 97.90448571922778,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:38:03.616531"
+  },
+  "1764203894828": {
+    "alerts": [
+      "pH excede el límite (9.14 > 8.5)"
+    ],
+    "id": "CA-08_1764203894828",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.957951730860707,
+      "pH": 9.139869067911157,
+      "tds": 239.08483844518634,
+      "turbidity": 3.2827075829143455
+    },
+    "qualityIndex": 98.24978601127435,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:38:14.828704"
+  },
+  "1764203912091": {
+    "alerts": [
+      "pH excede el límite (8.96 > 8.5)"
+    ],
+    "id": "CA-08_1764203912091",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.0417178539629255,
+      "pH": 8.964977426744046,
+      "tds": 241.0034574558561,
+      "turbidity": 3.1721428309483106
+    },
+    "qualityIndex": 98.70335025786864,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:38:32.091737"
+  },
+  "1764204052077": {
+    "alerts": [
+      "pH excede el límite (8.64 > 8.5)"
+    ],
+    "id": "CA-08_1764204052077",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.0238718250071615,
+      "pH": 8.638981753898069,
+      "tds": 129.97875005699075,
+      "turbidity": 2.821405483954072
+    },
+    "qualityIndex": 99.59780632180593,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:40:52.077226"
+  },
+  "1764204082144": {
+    "alerts": [
+      "pH excede el límite (8.88 > 8.5)"
+    ],
+    "id": "CA-08_1764204082144",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.0391255330232139,
+      "pH": 8.884028602029339,
+      "tds": 136.25973150444995,
+      "turbidity": 2.58272208033406
+    },
+    "qualityIndex": 98.91932866486489,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T19:41:22.144296"
+  },
+  "1764206724291": {
+    "alerts": [
+      "pH excede el límite (8.78 > 8.5)"
+    ],
+    "id": "CA-08_1764206724291",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.0389110715010725,
+      "pH": 8.781272779340778,
+      "tds": 159.87949784932005,
+      "turbidity": 2.526679725711615
+    },
+    "qualityIndex": 99.19922548129209,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:25:24.291190"
+  },
+  "1764206754345": {
+    "alerts": [
+      "pH excede el límite (8.95 > 8.5)"
+    ],
+    "id": "CA-08_1764206754345",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.1560363272173844,
+      "pH": 8.951200008530796,
+      "tds": 129.63927477537726,
+      "turbidity": 2.1218703093843065
+    },
+    "qualityIndex": 98.73983374268035,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:25:54.345541"
+  },
+  "1764206784344": {
+    "alerts": [
+      "pH excede el límite (8.89 > 8.5)"
+    ],
+    "id": "CA-08_1764206784344",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.319897682707941,
+      "pH": 8.894528711349032,
+      "tds": 110.009475544774,
+      "turbidity": 2.072860620992758
+    },
+    "qualityIndex": 98.89109157957512,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:26:24.344835"
+  },
+  "1764206814344": {
+    "alerts": [
+      "pH excede el límite (9.07 > 8.5)"
+    ],
+    "id": "CA-08_1764206814344",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.3098804865875762,
+      "pH": 9.074027993555399,
+      "tds": 99.64967268650582,
+      "turbidity": 2.447632492040968
+    },
+    "qualityIndex": 98.41848627212995,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:26:54.344412"
+  },
+  "1764206844344": {
+    "alerts": [
+      "pH excede el límite (8.96 > 8.5)"
+    ],
+    "id": "CA-08_1764206844344",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.4432880681731795,
+      "pH": 8.958419093518325,
+      "tds": 82.92731605727893,
+      "turbidity": 2.2252772966605048
+    },
+    "qualityIndex": 98.72070314881226,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:27:24.344711"
+  },
+  "1764206874344": {
+    "alerts": [
+      "pH excede el límite (9.01 > 8.5)"
+    ],
+    "id": "CA-08_1764206874344",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.3561937552419348,
+      "pH": 9.008028161878698,
+      "tds": 57.81718052904119,
+      "temperature": 32.833942850193665,
+      "turbidity": 2.2157889709325422
+    },
+    "qualityIndex": 98.87205467667467,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:27:54.344649"
+  },
+  "1764206904344": {
+    "alerts": [
+      "pH excede el límite (9.28 > 8.5)"
+    ],
+    "id": "CA-08_1764206904344",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.5386468297267433,
+      "pH": 9.28459829376488,
+      "tds": 50,
+      "turbidity": 2.000463409198852
+    },
+    "qualityIndex": 97.8873660740611,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:28:24.344847"
+  },
+  "1764206934344": {
+    "alerts": [
+      "pH excede el límite (9.36 > 8.5)"
+    ],
+    "id": "CA-08_1764206934344",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.5976105841555734,
+      "pH": 9.36172793823237,
+      "tds": 50,
+      "turbidity": 2.212762928113477
+    },
+    "qualityIndex": 97.69880105489618,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:28:54.344687"
+  },
+  "1764206964347": {
+    "alerts": [
+      "pH excede el límite (9.44 > 8.5)"
+    ],
+    "id": "CA-08_1764206964347",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.4515609942887038,
+      "pH": 9.441331322878307,
+      "tds": 90.19628905447607,
+      "turbidity": 1.8159958756479786
+    },
+    "qualityIndex": 97.50741899980444,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:29:24.347404"
+  },
+  "1764206994344": {
+    "alerts": [
+      "pH excede el límite (9.62 > 8.5)"
+    ],
+    "id": "CA-08_1764206994344",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.483333783705905,
+      "pH": 9.615761179254562,
+      "tds": 92.43376946536955,
+      "turbidity": 1.6235281155685413
+    },
+    "qualityIndex": 97.09913453949504,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:29:54.344963"
+  },
+  "1764207024351": {
+    "alerts": [
+      "pH excede el límite (9.82 > 8.5)"
+    ],
+    "id": "CA-08_1764207024351",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.4598979792175109,
+      "pH": 9.819000151254219,
+      "tds": 109.0466106210479,
+      "turbidity": 1.3280563664400047
+    },
+    "qualityIndex": 96.64171470889086,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:30:24.351170"
+  },
+  "1764207091612": {
+    "alerts": [
+      "pH excede el límite (8.66 > 8.5)"
+    ],
+    "id": "CA-08_1764207091612",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.8569942213274521,
+      "pH": 8.659959589155338,
+      "tds": 127.12022872604217,
+      "turbidity": 2.749259354752404
+    },
+    "qualityIndex": 99.53822074021093,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:31:31.612565"
+  },
+  "1764207121905": {
+    "alerts": [
+      "pH excede el límite (8.76 > 8.5)"
+    ],
+    "id": "CA-08_1764207121905",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.6856221070596316,
+      "pH": 8.763085333082707,
+      "tds": 175.83303020030144,
+      "turbidity": 2.8832168729352947
+    },
+    "qualityIndex": 99.24945004218577,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:32:01.905225"
+  },
+  "1764207151663": {
+    "id": "CA-08_1764207151663",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.5591956883882818,
+      "pH": 8.494536729293573,
+      "tds": 137.5052767177209,
+      "turbidity": 2.450738160322498
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:32:31.663284"
+  },
+  "1764207181665": {
+    "alerts": [
+      "pH excede el límite (8.65 > 8.5)"
+    ],
+    "id": "CA-08_1764207181665",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.7455851173971914,
+      "pH": 8.647899805446567,
+      "tds": 167.7871277526325,
+      "turbidity": 2.7686129235100165
+    },
+    "qualityIndex": 99.57244010460951,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:33:01.665509"
+  },
+  "1764207211672": {
+    "alerts": [
+      "pH excede el límite (8.82 > 8.5)"
+    ],
+    "id": "CA-08_1764207211672",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.6505524726120713,
+      "pH": 8.815829008913578,
+      "tds": 125.18198972240519,
+      "turbidity": 3.057476516695468
+    },
+    "qualityIndex": 99.10436951364912,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:33:31.672137"
+  },
+  "1764207241663": {
+    "alerts": [
+      "pH excede el límite (8.86 > 8.5)"
+    ],
+    "id": "CA-08_1764207241663",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.765536151097002,
+      "pH": 8.859173249600362,
+      "tds": 162.5255129689937,
+      "turbidity": 2.7323522993338845
+    },
+    "qualityIndex": 98.986436884456,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:34:01.663884"
+  },
+  "1764207271667": {
+    "alerts": [
+      "pH excede el límite (8.58 > 8.5)"
+    ],
+    "id": "CA-08_1764207271667",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.8125076744031986,
+      "pH": 8.57946768046435,
+      "tds": 186.0807829762109,
+      "turbidity": 2.558374926568254
+    },
+    "qualityIndex": 99.76843644785416,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:34:31.667222"
+  },
+  "1764207301663": {
+    "alerts": [
+      "pH excede el límite (8.63 > 8.5)"
+    ],
+    "id": "CA-08_1764207301663",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.6188805739450449,
+      "pH": 8.634828422906686,
+      "tds": 189.812857412506,
+      "turbidity": 2.234974337390924
+    },
+    "qualityIndex": 99.60963780545711,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:35:01.663208"
+  },
+  "1764207331663": {
+    "alerts": [
+      "pH excede el límite (8.83 > 8.5)"
+    ],
+    "id": "CA-08_1764207331663",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.6713846440859054,
+      "pH": 8.831688390197018,
+      "tds": 199.19802436635166,
+      "turbidity": 2.0391665241293753
+    },
+    "qualityIndex": 99.06108442819047,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:35:31.663396"
+  },
+  "1764207361663": {
+    "alerts": [
+      "pH excede el límite (8.62 > 8.5)"
+    ],
+    "id": "CA-08_1764207361663",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.8177751219288618,
+      "pH": 8.62494075075604,
+      "tds": 156.24634298923257,
+      "turbidity": 1.7731566387516877
+    },
+    "qualityIndex": 99.63785040858082,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:36:01.663215"
+  },
+  "1764207391663": {
+    "alerts": [
+      "pH excede el límite (8.67 > 8.5)"
+    ],
+    "id": "CA-08_1764207391663",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.8487308012382064,
+      "pH": 8.666665870762222,
+      "tds": 178.34620405133435,
+      "turbidity": 1.7110353010945771
+    },
+    "qualityIndex": 99.51923302095767,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:36:31.663289"
+  },
+  "1764207421663": {
+    "alerts": [
+      "pH excede el límite (8.78 > 8.5)"
+    ],
+    "id": "CA-08_1764207421663",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.0170189655876944,
+      "pH": 8.784897280670299,
+      "tds": 190.19247765161447,
+      "turbidity": 2.1679608432179123
+    },
+    "qualityIndex": 99.1892412865852,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:37:01.663314"
+  },
+  "1764207451663": {
+    "alerts": [
+      "pH excede el límite (9.05 > 8.5)"
+    ],
+    "id": "CA-08_1764207451663",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.9466152787923326,
+      "pH": 9.051781238145118,
+      "tds": 236.11961251128795,
+      "turbidity": 2.5210186832676937
+    },
+    "qualityIndex": 98.47604238428825,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:37:31.663270"
+  },
+  "1764207481663": {
+    "alerts": [
+      "pH excede el límite (9.05 > 8.5)"
+    ],
+    "id": "CA-08_1764207481663",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.9341709137792651,
+      "pH": 9.049743774296223,
+      "tds": 263.1898415784525,
+      "turbidity": 2.7222484334442103
+    },
+    "qualityIndex": 98.48132779223637,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:38:01.663261"
+  },
+  "1764207511663": {
+    "alerts": [
+      "pH excede el límite (8.77 > 8.5)"
+    ],
+    "id": "CA-08_1764207511663",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.083137095624589,
+      "pH": 8.767691897380463,
+      "tds": 218.27304311151693,
+      "turbidity": 2.9791982636746566
+    },
+    "qualityIndex": 99.23670932865342,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:38:31.663245"
+  },
+  "1764207541663": {
+    "alerts": [
+      "pH excede el límite (8.75 > 8.5)"
+    ],
+    "id": "CA-08_1764207541663",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.2159627346748483,
+      "pH": 8.746641432373961,
+      "tds": 204.14273022138516,
+      "turbidity": 3.4605850916723004
+    },
+    "qualityIndex": 99.29503960382706,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:39:01.663266"
+  },
+  "1764207754633": {
+    "alerts": [
+      "pH excede el límite (8.78 > 8.5)"
+    ],
+    "id": "CA-08_1764207754633",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.9921958855286914,
+      "pH": 8.783290179841027,
+      "tds": 142.1165873481114,
+      "turbidity": 2.6907534865507543
+    },
+    "qualityIndex": 99.19366725327139,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:42:34.633827"
+  },
+  "1764207784683": {
+    "alerts": [
+      "pH excede el límite (8.64 > 8.5)"
+    ],
+    "id": "CA-08_1764207784683",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.7990742850507186,
+      "pH": 8.63637094920247,
+      "tds": 156.45795119795102,
+      "turbidity": 3.1131103044587594
+    },
+    "qualityIndex": 99.60524232341172,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:43:04.683709"
+  },
+  "1764207814683": {
+    "alerts": [
+      "pH excede el límite (8.73 > 8.5)"
+    ],
+    "id": "CA-08_1764207814683",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.8556738107663872,
+      "pH": 8.734360159021852,
+      "tds": 145.53032479957886,
+      "turbidity": 2.910844718824759
+    },
+    "qualityIndex": 99.3292005517434,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:43:34.683251"
+  },
+  "1764207844684": {
+    "alerts": [
+      "pH excede el límite (8.77 > 8.5)"
+    ],
+    "id": "CA-08_1764207844684",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.7971502147484275,
+      "pH": 8.76965463867137,
+      "tds": 158.3245249366154,
+      "turbidity": 2.9560187748803832
+    },
+    "qualityIndex": 99.2312848972345,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:44:04.684918"
+  },
+  "1764207874686": {
+    "alerts": [
+      "pH excede el límite (9.01 > 8.5)"
+    ],
+    "id": "CA-08_1764207874686",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.9368936817498412,
+      "pH": 9.012221451287544,
+      "tds": 193.09318932087714,
+      "turbidity": 3.1236140182059584
+    },
+    "qualityIndex": 98.57909214155416,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:44:34.686884"
+  },
+  "1764207895856": {
+    "alerts": [
+      "pH excede el límite (8.72 > 8.5)"
+    ],
+    "id": "CA-08_1764207895856",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.895888104763771,
+      "pH": 8.719112681807934,
+      "tds": 146.01695590770808,
+      "turbidity": 2.792946650944092
+    },
+    "qualityIndex": 99.37174604284819,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:44:55.856915"
+  },
+  "1764207925900": {
+    "alerts": [
+      "pH excede el límite (9.02 > 8.5)"
+    ],
+    "id": "CA-08_1764207925900",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.959981957699582,
+      "pH": 9.017556441496591,
+      "tds": 192.94543599149273,
+      "turbidity": 2.3797220582834036
+    },
+    "qualityIndex": 98.56514221769956,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:45:25.900800"
+  },
+  "1764207955900": {
+    "alerts": [
+      "pH excede el límite (9.23 > 8.5)"
+    ],
+    "id": "CA-08_1764207955900",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.0121175624000691,
+      "pH": 9.225146994165707,
+      "tds": 183.3589127670069,
+      "turbidity": 2.4660071563453547
+    },
+    "qualityIndex": 98.03486330726136,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:45:55.900255"
+  },
+  "1764207985900": {
+    "alerts": [
+      "pH excede el límite (9.06 > 8.5)"
+    ],
+    "id": "CA-08_1764207985900",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.1887846321099438,
+      "pH": 9.062205359371669,
+      "tds": 177.72715240602935,
+      "turbidity": 2.2229092026491926
+    },
+    "qualityIndex": 98.44903823882598,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:46:25.900185"
+  },
+  "1764208015900": {
+    "alerts": [
+      "pH excede el límite (9.01 > 8.5)"
+    ],
+    "id": "CA-08_1764208015900",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.2852606191292588,
+      "pH": 9.00885908211695,
+      "tds": 160.83204854173798,
+      "turbidity": 2.0645755796961933
+    },
+    "qualityIndex": 98.58789254699559,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:46:55.900228"
+  },
+  "1764208045900": {
+    "alerts": [
+      "pH excede el límite (9.15 > 8.5)"
+    ],
+    "id": "CA-08_1764208045900",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.133419332637606,
+      "pH": 9.153156096831434,
+      "tds": 188.333632095101,
+      "turbidity": 1.7329165332669851
+    },
+    "qualityIndex": 98.21603584074803,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:47:25.900255"
+  },
+  "1764208075900": {
+    "alerts": [
+      "pH excede el límite (9.30 > 8.5)"
+    ],
+    "id": "CA-08_1764208075900",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.2215142609344225,
+      "pH": 9.304609520937472,
+      "tds": 227.40420560525433,
+      "turbidity": 1.3672395894321934
+    },
+    "qualityIndex": 97.83814269925321,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:47:55.900189"
+  },
+  "1764208105922": {
+    "alerts": [
+      "pH excede el límite (9.01 > 8.5)"
+    ],
+    "id": "CA-08_1764208105922",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.242717730068985,
+      "pH": 9.007600222439917,
+      "tds": 258.995032853276,
+      "turbidity": 0.9179020150311556
+    },
+    "qualityIndex": 98.59118907948597,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:48:25.922837"
+  },
+  "1764208136050": {
+    "alerts": [
+      "pH excede el límite (9.21 > 8.5)"
+    ],
+    "id": "CA-08_1764208136050",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.3902598240813768,
+      "pH": 9.213952673732964,
+      "tds": 244.52767636319385,
+      "turbidity": 0.8636777217359237
+    },
+    "qualityIndex": 98.06284908601633,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:48:56.050934"
+  },
+  "1764208583770": {
+    "alerts": [
+      "pH excede el límite (8.80 > 8.5)"
+    ],
+    "id": "CA-08_1764208583770",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.0006241810165624,
+      "pH": 8.79947871561442,
+      "tds": 131.19649701979543,
+      "turbidity": 2.6910914829634063
+    },
+    "qualityIndex": 99.14915779305483,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:56:23.770426"
+  },
+  "1764208613820": {
+    "alerts": [
+      "pH excede el límite (8.61 > 8.5)"
+    ],
+    "id": "CA-08_1764208613820",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.0663004697237226,
+      "pH": 8.609777805741315,
+      "tds": 155.0270987195486,
+      "turbidity": 2.3295729394155833
+    },
+    "qualityIndex": 99.68124088618143,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:56:53.820673"
+  },
+  "1764208643816": {
+    "alerts": [
+      "pH excede el límite (8.74 > 8.5)"
+    ],
+    "id": "CA-08_1764208643816",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.0767232997258267,
+      "pH": 8.742917333402549,
+      "tds": 116.38613706789604,
+      "turbidity": 2.4488578215228642
+    },
+    "qualityIndex": 99.3053882241501,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T20:57:23.816215"
+  },
+  "1764208909033": {
+    "alerts": [
+      "pH excede el límite (8.75 > 8.5)"
+    ],
+    "id": "CA-08_1764208909033",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.0338960251224532,
+      "pH": 8.749386175341286,
+      "tds": 139.97223731032707,
+      "turbidity": 2.4829951978619507
+    },
+    "qualityIndex": 99.28741808184174,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T21:01:49.033423"
+  },
+  "1764208939083": {
+    "alerts": [
+      "pH excede el límite (8.71 > 8.5)"
+    ],
+    "id": "CA-08_1764208939083",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.1858393210888236,
+      "pH": 8.714956305638793,
+      "tds": 103.51657928160054,
+      "turbidity": 2.681077248827765
+    },
+    "qualityIndex": 99.38336952561738,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T21:02:19.083323"
+  },
+  "1764208969081": {
+    "id": "CA-08_1764208969081",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.0667698723939072,
+      "pH": 8.445206686140736,
+      "tds": 121.08980745653346,
+      "turbidity": 3.036562922152542
+    },
+    "qualityIndex": 100,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T21:02:49.081284"
+  },
+  "1764208999081": {
+    "alerts": [
+      "pH excede el límite (8.66 > 8.5)"
+    ],
+    "id": "CA-08_1764208999081",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.1273936557330078,
+      "pH": 8.660230134697578,
+      "tds": 136.14112700161613,
+      "turbidity": 2.9097123195673626
+    },
+    "qualityIndex": 99.53745416632864,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T21:03:19.081373"
+  },
+  "1764209029081": {
+    "alerts": [
+      "pH excede el límite (8.76 > 8.5)"
+    ],
+    "id": "CA-08_1764209029081",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.262505437100177,
+      "pH": 8.760385508843298,
+      "tds": 109.2048318766436,
+      "turbidity": 3.1715458938679673
+    },
+    "qualityIndex": 99.25692337232064,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T21:03:49.081240"
+  },
+  "1764209059081": {
+    "alerts": [
+      "pH excede el límite (8.52 > 8.5)"
+    ],
+    "id": "CA-08_1764209059081",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.4010325993113482,
+      "pH": 8.519740240168108,
+      "tds": 136.12702226308642,
+      "turbidity": 2.8678838644633187
+    },
+    "qualityIndex": 99.94207499403844,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T21:04:19.081444"
+  },
+  "1764209089081": {
+    "alerts": [
+      "pH excede el límite (8.77 > 8.5)"
+    ],
+    "id": "CA-08_1764209089081",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.2461677604472667,
+      "pH": 8.768897210813272,
+      "tds": 144.44680255385754,
+      "turbidity": 3.1421947043342406
+    },
+    "qualityIndex": 99.23337791415298,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T21:04:49.081416"
+  },
+  "1764209119081": {
+    "alerts": [
+      "pH excede el límite (8.73 > 8.5)"
+    ],
+    "id": "CA-08_1764209119081",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.1788829750633705,
+      "pH": 8.725045657149213,
+      "tds": 193.74839910584888,
+      "turbidity": 2.9138037938028996
+    },
+    "qualityIndex": 99.35517341114195,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T21:05:19.081425"
+  },
+  "1764209149081": {
+    "alerts": [
+      "pH excede el límite (8.85 > 8.5)"
+    ],
+    "id": "CA-08_1764209149081",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.1589609691514131,
+      "pH": 8.846843626725502,
+      "tds": 229.5356428122064,
+      "turbidity": 2.9979087855165893
+    },
+    "qualityIndex": 99.01986617668442,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T21:05:49.081220"
+  },
+  "1764209179081": {
+    "alerts": [
+      "pH excede el límite (8.65 > 8.5)"
+    ],
+    "id": "CA-08_1764209179081",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.0489030210662365,
+      "pH": 8.645057069844166,
+      "tds": 180.35384361137517,
+      "turbidity": 3.316130587252123
+    },
+    "qualityIndex": 99.58052020746585,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T21:06:19.081261"
+  },
+  "1764209209081": {
+    "alerts": [
+      "pH excede el límite (8.63 > 8.5)"
+    ],
+    "id": "CA-08_1764209209081",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 0.972548910652483,
+      "pH": 8.629698585052457,
+      "tds": 162.97953738637057,
+      "turbidity": 3.5942328736051055
+    },
+    "qualityIndex": 99.62426675806178,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T21:06:49.081221"
+  },
+  "1764209239081": {
+    "alerts": [
+      "pH excede el límite (8.80 > 8.5)"
+    ],
+    "id": "CA-08_1764209239081",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.0499966754475742,
+      "pH": 8.803824043756554,
+      "tds": 190.27345163008343,
+      "turbidity": 3.155572094174947
+    },
+    "qualityIndex": 99.13723842546575,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T21:07:19.081328"
+  },
+  "1764209269081": {
+    "alerts": [
+      "pH excede el límite (8.79 > 8.5)"
+    ],
+    "id": "CA-08_1764209269081",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.0763241032260045,
+      "pH": 8.787308758038257,
+      "tds": 216.20163190717204,
+      "turbidity": 2.8821560164559656
+    },
+    "qualityIndex": 99.18260309854413,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T21:07:49.081349"
+  },
+  "1764209299081": {
+    "alerts": [
+      "pH excede el límite (9.05 > 8.5)"
+    ],
+    "id": "CA-08_1764209299081",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.2679784409664991,
+      "pH": 9.04655682421111,
+      "tds": 254.80158768590104,
+      "turbidity": 2.894477238951376
+    },
+    "qualityIndex": 98.48959986978589,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T21:08:19.081316"
+  },
+  "1764209329099": {
+    "alerts": [
+      "pH excede el límite (8.85 > 8.5)"
+    ],
+    "id": "CA-08_1764209329099",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.186577352433889,
+      "pH": 8.847614899584014,
+      "tds": 213.68048083880868,
+      "turbidity": 2.730475071266717
+    },
+    "qualityIndex": 99.01777229363714,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T21:08:49.099390"
+  },
+  "1764209359081": {
+    "alerts": [
+      "pH excede el límite (9.79 > 8.5)"
+    ],
+    "id": "CA-08_1764209359081",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.1712037785800575,
+      "pH": 9.793819533641283,
+      "tds": 231.597690909707,
+      "turbidity": 3.0762148751627567
+    },
+    "qualityIndex": 96.69735712099586,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T21:09:19.081393"
+  },
+  "1764209389081": {
+    "alerts": [
+      "pH excede el límite (9.96 > 8.5)"
+    ],
+    "id": "CA-08_1764209389081",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.1668920123443354,
+      "pH": 9.960670338106894,
+      "tds": 238.26865629057744,
+      "turbidity": 3.1166733756517435
+    },
+    "qualityIndex": 96.33390552913202,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T21:09:49.081547"
+  },
+  "latest": {
+    "alerts": [
+      "pH excede el límite (9.96 > 8.5)"
+    ],
+    "id": "CA-08_1764209389081",
+    "overallStatus": "excellent",
+    "parameters": {
+      "chlorine_residual": 1.1668920123443354,
+      "pH": 9.960670338106894,
+      "tds": 238.26865629057744,
+      "turbidity": 3.1166733756517435
+    },
+    "qualityIndex": 96.33390552913202,
+    "stationId": "CA-08",
+    "timestamp": "2025-11-26T21:09:49.081547"
+  }
+}

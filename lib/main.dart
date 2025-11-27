@@ -1,5 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'firebase_options.dart';
 import 'core/themes/app_theme.dart';
 import 'core/providers/theme_provider.dart';
 import 'features/auth/presentation/pages/login_page.dart';
@@ -10,10 +14,16 @@ import 'features/settings/presentation/settings_page.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Initialize Firebase (you would add your firebase_options.dart here)
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
+  // Initialize Firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  
+  // Enable offline persistence for Realtime Database
+  FirebaseDatabase.instance.setPersistenceEnabled(true);
+  
+  // Keep data synced even when offline (cache size: 10MB)
+  FirebaseDatabase.instance.setPersistenceCacheSizeBytes(10000000);
   
   runApp(const WaterQualityApp());
 }
@@ -131,3 +141,12 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
+/*
+import 'package:flutter/widgets.dart';
+import 'scripts/migrate_csv_to_firebase.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();  // 👈 Necesario para usar Firebase
+  await runMigrator();
+}
+*/

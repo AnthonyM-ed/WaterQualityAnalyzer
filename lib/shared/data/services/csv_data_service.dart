@@ -132,8 +132,6 @@ class CsvDataService {
     // Sort by timestamp ascending
     filtered.sort((a, b) => a.timestamp.compareTo(b.timestamp));
     
-    print('📊 Filtered readings: ${filtered.length} from ${filtered.isNotEmpty ? filtered.first.timestamp : 'N/A'}');
-    
     return filtered;
   }
   

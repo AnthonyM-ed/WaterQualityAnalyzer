@@ -4,7 +4,7 @@ import 'dart:math' as math;
 
 import '../../../core/constants/app_constants.dart';
 import '../../../core/themes/app_theme.dart';
-import '../../../shared/data/services/csv_data_service.dart';
+import '../../../shared/data/services/firebase_data_service.dart';
 import '../../../shared/data/services/simulated_data_service.dart';
 import '../../../shared/domain/domain.dart';
 
@@ -19,9 +19,10 @@ class _ChartsPageState extends State<ChartsPage> {
   List<WaterStation> _stations = [];
   String _selectedStationId = '';
   String _selectedParameter = 'pH';
-  String _selectedPeriod = '7d'; // 7d, 30d, 90d
+  String _selectedPeriod = '24h'; // 24h, 7d, 30d, 90d
   final List<Map<String, dynamic>> _historicalData = [];
   bool _isLoading = true;
+  final _firebaseData = FirebaseDataService();
 
   final List<String> _parameters = ['pH', 'tds', 'turbidity', 'chlorine_residual'];
   final Map<String, String> _parameterLabels = {
@@ -32,6 +33,7 @@ class _ChartsPageState extends State<ChartsPage> {
   };
 
   final Map<String, String> _periodLabels = {
+    '24h': 'Últimas 24 horas',
     '7d': 'Últimos 7 días',
     '30d': 'Últimos 30 días',
     '90d': 'Últimos 90 días',
@@ -61,16 +63,67 @@ class _ChartsPageState extends State<ChartsPage> {
   Future<void> _generateHistoricalData() async {
     _historicalData.clear();
 
-    final days = _selectedPeriod == '7d' ? 7 : (_selectedPeriod == '30d' ? 30 : 90);
+    // Mostrar indicador de carga mientras procesa
+    setState(() => _isLoading = true);
+
+    // Calcular el período de tiempo
+    final Duration duration;
+    final int estimatedReadings;
     
-    // Load readings from CSV
-    final readings = await CsvDataService.getHistoricalReadings(
-      _selectedStationId,
-      days: days,
+    switch (_selectedPeriod) {
+      case '24h':
+        duration = const Duration(hours: 24);
+        estimatedReadings = 48; // ~cada 30 min
+        break;
+      case '7d':
+        duration = const Duration(days: 7);
+        estimatedReadings = 336; // 7 * 48
+        break;
+      case '30d':
+        duration = const Duration(days: 30);
+        estimatedReadings = 1440; // 30 * 48
+        break;
+      case '90d':
+        duration = const Duration(days: 90);
+        estimatedReadings = 4320; // 90 * 48
+        break;
+      default:
+        duration = const Duration(days: 7);
+        estimatedReadings = 336;
+    }
+    
+    // Try to load from Firebase first (cloud-first strategy)
+    final now = DateTime.now();
+    final startDate = now.subtract(duration);
+    
+    print('📅 Fetching data from Firebase');
+    print('   Período: $_selectedPeriod');
+    print('   Start: ${startDate.toIso8601String()}');
+    print('   End: ${now.toIso8601String()}');
+    print('   Station: $_selectedStationId');
+    
+    // Obtener TODOS los datos sin límite para poder muestrear correctamente
+    var readings = await _firebaseData.getHistoricalReadings(
+      stationId: _selectedStationId,
+      startDate: startDate,
+      endDate: now,
+      limit: 10000, // Límite alto para obtener todos los datos del período
     );
 
-    // Convert to chart data
-    for (final reading in readings) {
+    // Si tenemos demasiados datos, aplicar muestreo inteligente
+    // Para gráficos más fluidos, limitar a máximo 100 puntos
+    if (readings.isNotEmpty) {
+      final maxPoints = _selectedPeriod == '24h' ? 50 : estimatedReadings;
+      if (readings.length > maxPoints) {
+        readings = _sampleReadings(readings, maxPoints);
+      }
+    }
+
+    // Convert to chart data (invertir orden para que el gráfico vaya de antiguo a reciente)
+    // readings ya está ordenado de más reciente a más antiguo, necesitamos revertir
+    final reversedReadings = readings.reversed.toList();
+    
+    for (final reading in reversedReadings) {
       _historicalData.add({
         'date': reading.timestamp,
         'pH': reading.parameters['pH'] ?? 7.0,
@@ -79,6 +132,29 @@ class _ChartsPageState extends State<ChartsPage> {
         'chlorine_residual': reading.parameters['chlorine_residual'] ?? 1.0,
       });
     }
+    
+    setState(() => _isLoading = false);
+  }
+
+  /// Muestrear lecturas manteniendo distribución uniforme en el tiempo
+  List<WaterQualityReading> _sampleReadings(
+    List<WaterQualityReading> readings,
+    int targetCount,
+  ) {
+    if (readings.length <= targetCount) return readings;
+
+    // Estrategia: tomar muestras uniformemente distribuidas
+    final sampled = <WaterQualityReading>[];
+    final step = readings.length / targetCount;
+
+    for (int i = 0; i < targetCount; i++) {
+      final index = (i * step).floor();
+      if (index < readings.length) {
+        sampled.add(readings[index]);
+      }
+    }
+
+    return sampled;
   }
 
   @override
@@ -284,9 +360,17 @@ class _ChartsPageState extends State<ChartsPage> {
 
     // Add padding to Y axis (more for large values like TDS)
     final range = maxY - minY;
-    final yPadding = range > 100 ? range * 0.15 : range * 0.25;
-    minY = math.max(0, minY - yPadding);
-    maxY = maxY + yPadding;
+    
+    // Si todos los valores son iguales (range = 0), usar un rango por defecto
+    if (range == 0) {
+      final baseValue = maxY;
+      minY = math.max(0, baseValue - 1);
+      maxY = baseValue + 1;
+    } else {
+      final yPadding = range > 100 ? range * 0.15 : range * 0.25;
+      minY = math.max(0, minY - yPadding);
+      maxY = maxY + yPadding;
+    }
 
     // Get standard limits
     final standards = AppConstants.waterQualityStandards[_selectedParameter];
@@ -324,7 +408,7 @@ class _ChartsPageState extends State<ChartsPage> {
                   gridData: FlGridData(
                     show: true,
                     drawVerticalLine: true,
-                    horizontalInterval: (maxY - minY) / 5,
+                    horizontalInterval: math.max(0.1, (maxY - minY) / 5),
                     getDrawingHorizontalLine: (value) {
                       return FlLine(
                         color: Colors.grey.withOpacity(0.2),
@@ -354,13 +438,28 @@ class _ChartsPageState extends State<ChartsPage> {
                           final index = value.toInt();
                           if (index >= 0 && index < _historicalData.length) {
                             final date = _historicalData[index]['date'] as DateTime;
-                            return Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child: Text(
-                                '${date.day}/${date.month}',
-                                style: const TextStyle(fontSize: 10),
-                              ),
-                            );
+                            
+                            // Para 24h mostrar hora, para otros períodos mostrar día/mes
+                            if (_selectedPeriod == '24h') {
+                              final hour = date.hour;
+                              final period = hour >= 12 ? 'pm' : 'am';
+                              final displayHour = hour > 12 ? hour - 12 : (hour == 0 ? 12 : hour);
+                              return Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Text(
+                                  '$displayHour$period',
+                                  style: const TextStyle(fontSize: 10),
+                                ),
+                              );
+                            } else {
+                              return Padding(
+                                padding: const EdgeInsets.only(top: 8.0),
+                                child: Text(
+                                  '${date.day}/${date.month}',
+                                  style: const TextStyle(fontSize: 10),
+                                ),
+                              );
+                            }
                           }
                           return const Text('');
                         },

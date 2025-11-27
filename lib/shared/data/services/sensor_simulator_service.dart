@@ -3,6 +3,7 @@ import 'dart:math';
 import '../../domain/domain.dart';
 import '../../../core/constants/app_constants.dart';
 import 'csv_data_service.dart';
+import 'firebase_data_service.dart';
 
 /// Simulates IoT sensors sending data periodically
 /// Uses REAL CSV data as baseline and adds small realistic variations
@@ -38,17 +39,17 @@ class SensorSimulatorService {
   /// [interval] - Time between readings (default 30 seconds like real sensors)
   Future<void> startSimulation({Duration interval = const Duration(seconds: 30)}) async {
     if (_timer != null) {
-      print('⚠️ Sensor simulation already running');
+      print('Sensor simulation already running');
       return;
     }
 
-    print('🔌 Starting IoT sensor simulation...');
-    print('📡 Loading real data from CSV as baseline...');
+    print('Starting IoT sensor simulation...');
+    print('Loading real data from CSV as baseline...');
     
     // Load CSV data first
     await _loadCsvBaseline();
     
-    print('📡 Sensors will send data every ${interval.inSeconds}s');
+    print('Sensors will send data every ${interval.inSeconds}s');
     
     // Send initial readings immediately
     _generateAndBroadcastReadings();
@@ -68,13 +69,13 @@ class SensorSimulatorService {
         final readings = await CsvDataService.getStationReadings(stationId);
         if (readings.isNotEmpty) {
           _csvBaselineData[stationId] = readings;
-          print('✅ Loaded ${readings.length} baseline readings for $stationId');
+          print('Loaded ${readings.length} baseline readings for $stationId');
         }
       }
       
       _csvDataLoaded = true;
     } catch (e) {
-      print('❌ Error loading CSV baseline: $e');
+      print('Error loading CSV baseline: $e');
       _csvDataLoaded = false;
     }
   }
@@ -83,19 +84,19 @@ class SensorSimulatorService {
   void stopSimulation() {
     _timer?.cancel();
     _timer = null;
-    print('🔌 Sensor simulation stopped');
+    print('Sensor simulation stopped');
   }
 
   /// Subscribe to sensor data updates (like MQTT subscription)
   void subscribe(Function(WaterQualityReading) onData) {
     _listeners.add(onData);
-    print('📻 New subscriber connected (${_listeners.length} total)');
+    print('New subscriber connected (${_listeners.length} total)');
   }
 
   /// Unsubscribe from updates
   void unsubscribe(Function(WaterQualityReading) onData) {
     _listeners.remove(onData);
-    print('📻 Subscriber disconnected (${_listeners.length} remaining)');
+    print('Subscriber disconnected (${_listeners.length} remaining)');
   }
 
   /// Simulate sensor failure/recovery
@@ -110,25 +111,33 @@ class SensorSimulatorService {
     
     for (final stationId in stationIds) {
       if (_sensorStatus[stationId] != true) {
-        print('⚠️ Sensor $stationId offline, skipping...');
+        print('Sensor $stationId offline, skipping...');
         continue;
       }
 
       final reading = _generateReading(stationId);
       _lastReadings[stationId] = reading;
       
+      // Save to Firebase (with offline support)
+      _saveToFirebase(reading);
+      
       // Broadcast to all listeners (simulate MQTT publish)
       for (final listener in _listeners) {
         listener(reading);
       }
-      
-      print('📊 $stationId: pH=${reading.parameters['pH']?.toStringAsFixed(2)}, '
-            'TDS=${reading.parameters['tds']?.toStringAsFixed(0)}, '
-            'Turbidez=${reading.parameters['turbidity']?.toStringAsFixed(1)}');
     }
   }
 
-  /// Generate realistic sensor reading based on CSV data with small variations
+  /// Guardar lectura en Firebase (funciona offline con cache)
+  Future<void> _saveToFirebase(WaterQualityReading reading) async {
+    try {
+      await FirebaseDataService().saveReading(reading);
+    } catch (e) {
+      // Ignorar errores (persistencia offline activa)
+    }
+  }
+
+  /// Generar lectura realista basada en datos CSV con pequeñas variaciones
   WaterQualityReading _generateReading(String stationId) {
     final lastReading = _lastReadings[stationId];
     final now = DateTime.now();
@@ -184,7 +193,7 @@ class SensorSimulatorService {
   Map<String, double> _getBaseValuesFromCsv(String stationId) {
     if (!_csvDataLoaded || !_csvBaselineData.containsKey(stationId)) {
       // Fallback to default values if CSV not loaded
-      print('⚠️ Using fallback values for $stationId (CSV not loaded)');
+      print('Using fallback values for $stationId (CSV not loaded)');
       return _getFallbackValues(stationId);
     }
 
@@ -302,19 +311,19 @@ class SensorSimulatorService {
         break;
       case 1: // Turbidity spike (sediment/rain)
         parameters['turbidity'] = 5.0 + _random.nextDouble() * 3.0;
-        print('⚠️ [$stationId] ANOMALY: High turbidity!');
+        print('[$stationId] ANOMALY: High turbidity!');
         break;
       case 2: // Low chlorine (treatment failure)
         parameters['chlorine_residual'] = 0.0 + _random.nextDouble() * 0.1;
-        print('⚠️ [$stationId] ANOMALY: Low chlorine!');
+        print('[$stationId] ANOMALY: Low chlorine!');
         break;
       case 3: // TDS spike (contamination)
         parameters['tds'] = parameters['tds']! * 1.5;
-        print('⚠️ [$stationId] ANOMALY: TDS spike!');
+        print('[$stationId] ANOMALY: TDS spike!');
         break;
       case 4: // Temperature spike
         parameters['temperature'] = 30.0 + _random.nextDouble() * 3.0;
-        print('⚠️ [$stationId] ANOMALY: High temperature!');
+        print('[$stationId] ANOMALY: High temperature!');
         break;
     }
     

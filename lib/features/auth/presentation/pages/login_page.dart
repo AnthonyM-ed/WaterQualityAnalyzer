@@ -176,19 +176,6 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 16),
                   
-                  // Forgot password
-                  TextButton(
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Funcionalidad de recuperación de contraseña próximamente'),
-                        ),
-                      );
-                    },
-                    child: const Text('¿Olvidaste tu contraseña?'),
-                  ),
-                  const SizedBox(height: 32),
-                  
                   // Divider
                   Row(
                     children: [
