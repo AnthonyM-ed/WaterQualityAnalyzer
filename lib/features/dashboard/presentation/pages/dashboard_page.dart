@@ -321,7 +321,7 @@ class _DashboardPageState extends State<DashboardPage> {
         Expanded(
           child: _buildOverviewCard(
             'Calidad General',
-            '${avgQualityIndex.toStringAsFixed(1)}%',
+            '${avgQualityIndex.toInt()}%',
             Icons.water_drop,
             AppTheme.getQualityColor(_getQualityStatus(avgQualityIndex)),
           ),
@@ -340,13 +340,13 @@ class _DashboardPageState extends State<DashboardPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(icon, color: color),
+                Icon(icon, color: color, size: 20),
                 Expanded(
                   child: Text(
                     value,
                     textAlign: TextAlign.end,
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: color,
                     ),

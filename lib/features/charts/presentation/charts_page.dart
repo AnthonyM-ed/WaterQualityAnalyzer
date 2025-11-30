@@ -202,11 +202,6 @@ class _ChartsPageState extends State<ChartsPage> {
                       ],
                     ),
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.refresh),
-                    onPressed: _loadData,
-                    tooltip: 'Actualizar',
-                  ),
                 ],
               ),
               const SizedBox(height: 16),
