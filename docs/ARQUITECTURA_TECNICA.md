@@ -107,54 +107,83 @@ El sistema utiliza Flutter como framework multiplataforma para desarrollar una a
 lib/
 ├── core/                          # Configuración global
 │   ├── constants/
-│   │   └── app_constants.dart     # Umbrales de calidad, configuración
-│   └── themes/
-│       └── app_theme.dart         # Tema Material Design
+│   │   ├── app_constants.dart     # Umbrales de calidad LMP (DIGESA)
+│   │   └── api_constants.dart     # Configuración de APIs
+│   ├── providers/
+│   │   └── theme_provider.dart    # Gestión de tema claro/oscuro
+│   ├── themes/
+│   │   └── app_theme.dart         # Tema Material Design
+│   ├── errors/                    # Manejo de errores
+│   ├── utils/                     # Utilidades compartidas
+│   └── widgets/                   # Widgets reutilizables
 │
 ├── features/                      # Módulos por funcionalidad
 │   ├── auth/                      # Autenticación
 │   │   ├── data/
 │   │   │   └── repositories/
 │   │   │       └── auth_repository.dart
+│   │   ├── domain/
 │   │   └── presentation/
-│   │       ├── pages/
-│   │       │   ├── login_page.dart
-│   │       │   └── register_page.dart
-│   │       └── widgets/
+│   │       └── pages/
+│   │           ├── login_page.dart
+│   │           └── register_page.dart
 │   │
 │   ├── dashboard/                 # Pantalla principal
+│   │   ├── data/
+│   │   ├── domain/
 │   │   └── presentation/
-│   │       ├── pages/
-│   │       │   └── dashboard_page.dart
-│   │       └── widgets/
-│   │           ├── station_card.dart
-│   │           └── metric_tile.dart
+│   │       └── pages/
+│   │           ├── dashboard_page.dart
+│   │           └── station_detail_page.dart
 │   │
-│   └── charts/                    # Análisis histórico
+│   ├── charts/                    # Análisis histórico
+│   │   ├── data/
+│   │   ├── domain/
+│   │   └── presentation/
+│   │       └── charts_page.dart
+│   │
+│   ├── maps/                      # Visualización geográfica
+│   │   ├── data/
+│   │   ├── domain/
+│   │   └── presentation/
+│   │       └── map_page.dart
+│   │
+│   └── settings/                  # Configuración de la app
+│       ├── data/
+│       ├── domain/
 │       └── presentation/
-│           ├── pages/
-│           │   └── charts_page.dart
-│           └── widgets/
-│               └── metric_chart.dart
+│           └── settings_page.dart
 │
 ├── shared/                        # Código compartido
 │   ├── domain/                    # Entidades del negocio
 │   │   ├── entities/
-│   │   │   ├── water_quality_reading.dart
-│   │   │   ├── monitoring_station.dart
-│   │   │   └── user.dart
-│   │   └── domain.dart
+│   │   │   ├── measurement.dart   # Mediciones de sensores
+│   │   │   ├── measurement.g.dart # JSON serialization
+│   │   │   ├── station.dart       # Estaciones de monitoreo
+│   │   │   ├── station.g.dart
+│   │   │   ├── sensor.dart        # Tipos de sensores
+│   │   │   ├── sensor.g.dart
+│   │   │   ├── alert.dart         # Alertas de calidad
+│   │   │   ├── alert.g.dart
+│   │   │   ├── user.dart          # Usuarios del sistema
+│   │   │   └── user.g.dart
+│   │   └── domain.dart            # Barrel file
 │   │
-│   └── data/                      # Servicios de datos
-│       └── services/
-│           ├── firebase_data_service.dart    # CRUD Firebase
-│           ├── csv_data_service.dart         # Lectura CSV
-│           └── sensor_simulator_service.dart # Simulación IoT
+│   ├── data/                      # Servicios de datos
+│   │   └── services/
+│   │       ├── firebase_data_service.dart    # CRUD Firebase Realtime DB
+│   │       ├── csv_data_service.dart         # Lectura de datos CSV
+│   │       ├── sensor_simulator_service.dart # Simulación IoT en tiempo real
+│   │       └── simulated_data_service.dart   # Generación de datos simulados
+│   │
+│   └── presentation/              # Widgets compartidos
 │
-├── scripts/                       # Herramientas
-│   └── migrate_csv_to_firebase.dart
+├── scripts/                       # Herramientas de desarrollo
+│   ├── migrate_csv_to_firebase.dart    # Migración CSV → Firebase
+│   └── check_firebase_data.dart        # Verificación de datos
 │
-└── main.dart                      # Entry point
+├── firebase_options.dart          # Configuración Firebase autogenerada
+└── main.dart                      # Entry point de la aplicación
 ```
 
 ### 2.3 Flujo de Datos
@@ -198,13 +227,13 @@ FirebaseDataService.saveReading()
 ### 3.1 Arquitectura General del Sistema
 
 ```
-┌──────────────────────────────────────────────────────────────┐
-│                     CAPA DE PRESENTACIÓN                     │
-│  ┌─────────────┐  ┌─────────────┐  ┌──────────────┐          │
-│  │  Dashboard  │  │   Gráficos  │  │ Autenticación│          │
-│  │    Page     │  │    Page     │  │     Page     │          │
-│  └─────────────┘  └─────────────┘  └──────────────┘          │
-└──────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                         CAPA DE PRESENTACIÓN                                 │
+│  ┌─────────────┐  ┌─────────────┐  ┌──────────────┐  ┌──────────────┐ ┌──────────────┐       │
+│  │  Dashboard  │  │   Gráficos  │  │ Autenticación│  │     Mapa     │ │ Cofiguración │       │
+│  │    Page     │  │    Page     │  │     Page     │  │     Page     │ │     Page     │       │
+│  └─────────────┘  └─────────────┘  └──────────────┘  └──────────────┘ └──────────────┘       │
+└──────────────────────────────────────────────────────────────────────────────────────────────┘
                             ↕
 ┌──────────────────────────────────────────────────────────────┐
 │                      CAPA DE DOMINIO                         │
@@ -267,28 +296,38 @@ FirebaseDataService.saveReading()
 
 #### Configuración Actual (Simulación)
 ```dart
-// SensorSimulatorService
+// lib/shared/data/services/sensor_simulator_service.dart
 class SensorSimulatorService {
-  // Intervalo de lectura (simula sensores reales)
-  Duration interval = Duration(seconds: 30);
+  // Intervalo de lectura (simula sensores reales de la cuenca del Río Acarí)
+  Duration interval = const Duration(seconds: 30);
   
-  // Generación de datos basada en CSV + variaciones
-  WaterQualityReading _generateReading(String stationId) {
-    // 1. Obtener baseline de datos históricos CSV
-    final baseline = _getBaselineReading(stationId);
+  // Generación de datos basada en CSV históricos + variaciones
+  Map<String, dynamic> _generateReading(String stationId) {
+    // 1. Obtener baseline de datos CSV históricos de Acarí
+    final baseline = CsvDataService.getStationBaseline(stationId);
     
-    // 2. Aplicar variaciones realistas (±5% drift)
-    final ph = baseline.ph + _random.nextDouble() * 0.4 - 0.2;
-    final tds = baseline.tds + _random.nextInt(20) - 10;
-    // ...
+    // 2. Aplicar variaciones realistas (drift de sensores reales)
+    final parameters = {
+      'ph': baseline['ph'] + _random.nextDouble() * 0.4 - 0.2,
+      'tds': baseline['tds'] + _random.nextInt(20) - 10,
+      'turbidity': baseline['turbidity'] + _random.nextDouble() * 2 - 1,
+      'chlorine_residual': baseline['chlorine_residual'] + _random.nextDouble() * 0.1 - 0.05,
+    };
     
-    // 3. Retornar lectura simulada
-    return WaterQualityReading(...);
+    // 3. Crear Measurement y guardar en Firebase
+    final measurement = Measurement(
+      id: '${stationId}_${DateTime.now().millisecondsSinceEpoch}',
+      stationId: stationId,
+      parameters: parameters,
+      timestamp: DateTime.now(),
+    );
+    
+    return measurement;
   }
   
   // Publicación a Firebase (simula MQTT publish)
-  Future<void> _saveToFirebase(WaterQualityReading reading) async {
-    await FirebaseDataService().saveReading(reading);
+  Future<void> _saveToFirebase(Measurement reading) async {
+    await FirebaseDataService().saveMeasurement(reading);
   }
 }
 ```
@@ -398,31 +437,59 @@ Region: us-central1
 
 #### Configuración de Persistencia Offline
 ```dart
-// Habilitar caché offline (10MB)
-FirebaseDatabase.instance.setPersistenceEnabled(true);
-FirebaseDatabase.instance.setPersistenceCacheSizeBytes(10000000);
+// lib/main.dart - Inicialización de Firebase
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Inicializar Firebase con opciones generadas
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  
+  // Habilitar persistencia offline (10MB)
+  FirebaseDatabase.instance.setPersistenceEnabled(true);
+  FirebaseDatabase.instance.setPersistenceCacheSizeBytes(10000000);
+  
+  runApp(const WaterQualityApp());
+}
 ```
 
-### 4.3 Umbrales de Calidad del Agua
+### 4.3 Umbrales de Calidad del Agua (LMP DIGESA)
 
 ```dart
-class WaterQualityThresholds {
-  // pH (nivel de acidez/alcalinidad)
-  static const double phMin = 6.5;      // Mínimo aceptable
-  static const double phMax = 8.5;      // Máximo aceptable
-  static const double phIdeal = 7.0;    // Neutro ideal
+// lib/core/constants/app_constants.dart
+class AppConstants {
+  // Estándares de calidad del agua para Cuenca Río Acarí - LMP DIGESA
+  static const Map<String, Map<String, double>> waterQualityStandards = {
+    'pH': {
+      'min': 6.5,
+      'max': 8.5,
+      'optimal_min': 7.0,
+      'optimal_max': 7.5,
+    },
+    'tds': { // Total Dissolved Solids (mg/L)
+      'min': 0.0,
+      'max': 1000.0,      // LMP DIGESA
+      'optimal_min': 0.0,
+      'optimal_max': 500.0,
+    },
+    'turbidity': { // UNT (Unidades Nefelométricas de Turbidez)
+      'min': 0.0,
+      'max': 5.0,         // LMP OMS
+      'optimal_min': 0.0,
+      'optimal_max': 1.0,
+    },
+    'chlorine_residual': { // Cloro residual (mg/L)
+      'min': 0.5,         // LMP mínimo para desinfección
+      'max': 5.0,         // LMP máximo seguro
+      'optimal_min': 0.5,
+      'optimal_max': 1.5,
+    },
+  };
   
-  // TDS - Total Dissolved Solids (ppm)
-  static const double tdsMax = 300;     // Límite seguro OMS
-  static const double tdsWarning = 200; // Advertencia
-  
-  // Turbidez (NTU - Nephelometric Turbidity Units)
-  static const double turbidityMax = 5.0;    // Límite OMS
-  static const double turbidityWarning = 3.0; // Advertencia
-  
-  // Cloro Residual (mg/L)
-  static const double chlorineMin = 0.5;     // Mínimo para desinfección
-  static const double chlorineMax = 5.0;     // Máximo seguro OMS
+  // Configuración de simulación - Cuenca Río Acarí
+  static const int dataUpdateIntervalSeconds = 30;
+  static const int maxStationsSimulated = 3; // CA-08, CA-09, CA-10
 }
 ```
 
@@ -430,13 +497,15 @@ class WaterQualityThresholds {
 
 #### Muestreo de Datos
 ```dart
-// Límites de puntos para gráficos
-const int maxPoints24h = 50;  // 24h: máximo 50 puntos
-// 7d, 30d, 90d: usar estimatedReadings del servicio
+// lib/features/charts/presentation/charts_page.dart
 
-// Algoritmo de muestreo uniforme
-List<WaterQualityReading> _sampleReadings(
-  List<WaterQualityReading> readings, 
+// Límites de puntos para optimización de rendimiento
+const int maxPoints24h = 50;  // 24h: máximo 50 puntos
+// Períodos más largos: estimatedReadings automático
+
+// Algoritmo de muestreo uniforme para reducir puntos en gráficos
+List<Measurement> _sampleReadings(
+  List<Measurement> readings, 
   int maxPoints
 ) {
   if (readings.length <= maxPoints) return readings;
@@ -471,21 +540,54 @@ CA-09,2025-08-20 09:00:00,7.5,220,18.0,0.4
 ### 4.6 Dependencias Principales
 
 ```yaml
+# pubspec.yaml
+name: water_quality_arequipa
+description: "Aplicación para monitorear calidad del agua - Río Acarí, Arequipa"
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.2
+
 dependencies:
   flutter:
     sdk: flutter
+  
+  # State Management
+  flutter_bloc: ^8.1.6
+  provider: ^6.1.1
+  equatable: ^2.0.5
   
   # Firebase
   firebase_core: ^2.31.1
   firebase_auth: ^4.19.6
   firebase_database: ^10.5.6
+  google_sign_in: ^6.2.1
   
-  # Gráficos
+  # Data & Storage
+  sqflite: ^2.3.3+1
+  shared_preferences: ^2.2.2
+  csv: ^6.0.0
+  
+  # Charts & Visualization
   fl_chart: ^0.69.0
   
-  # Utilidades
-  csv: ^6.0.0
+  # Maps & Location
+  flutter_map: ^8.2.2
+  latlong2: ^0.9.1
+  geolocator: ^12.0.0
+  geocoding: ^3.0.0
+  
+  # Networking
+  http: ^1.2.2
+  web_socket_channel: ^2.4.5
+  
+  # Notifications
+  flutter_local_notifications: ^17.2.2
+  
+  # Utilities
   intl: ^0.19.0
+  go_router: ^14.2.7
+  json_annotation: ^4.9.0
   
   # UI
   cupertino_icons: ^1.0.6
@@ -494,12 +596,23 @@ dependencies:
 ### 4.7 Métricas de Calidad del Código
 
 ```
-Archivos Dart: 25
-Líneas de código: ~3,500
-Cobertura de errores: Try-catch en todos los servicios
-Logs de producción: Mínimos (solo errores críticos)
-Arquitectura: Clean Architecture (3 capas)
-Separación de concerns: Features independientes
+Arquitectura: Clean Architecture con separación por features
+Patrón: Repository Pattern + Service Layer
+
+Estructura:
+├── 5 Features independientes (auth, dashboard, charts, maps, settings)
+├── 6 Entidades de dominio (Measurement, Station, Sensor, Alert, User)
+├── 4 Servicios de datos (Firebase, CSV, Simulator, Simulated)
+├── 2 Scripts de utilidad (migrate, check_firebase)
+└── Configuración centralizada (constants, themes, providers)
+
+Calidad:
+- Manejo de errores: Try-catch en todos los servicios críticos
+- Logs: Mínimos en producción (solo errores)
+- Serialización: JSON automática con json_annotation
+- Tipado: Fuerte con Dart null-safety
+- State Management: Provider + setState (escalable a Bloc)
+- Offline-first: Persistencia automática Firebase + CSV fallback
 ```
 
 ## 5. Seguridad
@@ -516,9 +629,29 @@ Separación de concerns: Features independientes
 
 ### 5.3 Validación de Datos
 ```dart
-// Validación en cliente (Flutter)
-if (ph < 0 || ph > 14) throw Exception('pH fuera de rango');
-if (tds < 0 || tds > 1000) throw Exception('TDS fuera de rango');
+// lib/shared/data/services/firebase_data_service.dart
+// Validación en cliente antes de guardar
+void _validateMeasurement(Measurement measurement) {
+  final ph = measurement.parameters['ph'];
+  if (ph < 0 || ph > 14) {
+    throw Exception('pH fuera de rango válido (0-14)');
+  }
+  
+  final tds = measurement.parameters['tds'];
+  if (tds < 0 || tds > 1000) {
+    throw Exception('TDS fuera de rango LMP DIGESA (0-1000 mg/L)');
+  }
+  
+  final turbidity = measurement.parameters['turbidity'];
+  if (turbidity < 0 || turbidity > 100) {
+    throw Exception('Turbidez fuera de rango (0-100 UNT)');
+  }
+  
+  final chlorine = measurement.parameters['chlorine_residual'];
+  if (chlorine < 0 || chlorine > 10) {
+    throw Exception('Cloro residual fuera de rango (0-10 mg/L)');
+  }
+}
 
 // Validación en Firebase Rules
 ".validate": "newData.child('ph').val() >= 0 && 
@@ -546,6 +679,6 @@ Escalabilidad: Migrar a Firebase Blaze para +100 usuarios
 
 ---
 
-**Versión del Documento**: 1.2  
-**Última Actualización**: 26 de Noviembre, 2025  
+**Versión del Documento**: 1.3  
+**Última Actualización**: 30 de Noviembre, 2025  
 **Autores**: Equipo de Desarrollo Water Quality Analyzer

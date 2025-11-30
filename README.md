@@ -1,136 +1,255 @@
-# Water Quality Monitor - Arequipa
+# Monitor de Calidad del Agua - Río Acarí, Arequipa
 
-Una aplicación móvil multiplataforma desarrollada en Flutter para el monitoreo de la calidad del agua en pueblos jóvenes de Arequipa, Perú, que no tienen acceso a agua potable.
+<div align="center">
+
+![Flutter](https://img.shields.io/badge/Flutter-3.5.4-02569B?logo=flutter)
+![Dart](https://img.shields.io/badge/Dart-3.5.4-0175C2?logo=dart)
+![Firebase](https://img.shields.io/badge/Firebase-Realtime%20DB-FFCA28?logo=firebase)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+
+**Sistema de monitoreo en tiempo real de la calidad del agua en la cuenca del Río Acarí, Caravelí - Arequipa, Perú**
+
+[Características](#-características) • [Arquitectura](#-arquitectura) • [Instalación](#-instalación) • [Documentación](#-documentación) • [Estaciones](#-estaciones-de-monitoreo)
+
+</div>
+
+---
 
 ## Descripción
 
-Esta aplicación está diseñada para monitorear la calidad del agua en pueblos jóvenes y asentamientos humanos de Arequipa mediante sensores IoT simulados. Su objetivo es proporcionar análisis en tiempo real, alertas automáticas, visualización de datos históricos y mapas de ubicación de estaciones de monitoreo para garantizar el acceso a agua segura para comunidades vulnerables.
+Aplicación multiplataforma desarrollada en **Flutter** para el monitoreo continuo de la calidad del agua en la **cuenca del Río Acarí** (Caravelí, Arequipa). El sistema integra sensores IoT simulados que replican condiciones reales basadas en datos históricos de la zona, proporcionando análisis en tiempo real, alertas automáticas según LMP DIGESA, visualización de datos históricos y mapas de estaciones de monitoreo.
 
-## Arquitectura del Proyecto
+### Contexto del Proyecto
 
-El proyecto sigue los principios de **Clean Architecture** y está organizado en las siguientes capas:
+Basado en el estudio "Parámetros fisicoquímicos de la cuenca del río Acarí" (2008), esta aplicación monitorea **3 estaciones críticas** (CA-08, CA-09, CA-10) que representan puntos estratégicos desde la zona alta hasta el impacto urbano del pueblo de Acarí.
+
+## Características
+
+### Implementadas
+- ✅ **Autenticación Firebase**: Login/Registro con Firebase Auth + Realtime Database
+- ✅ **Dashboard en Tiempo Real**: Monitoreo simultáneo de 3 estaciones (CA-08, CA-09, CA-10)
+- ✅ **Sincronización Cloud**: Firebase Realtime Database con persistencia offline (10MB)
+- ✅ **Gráficos Históricos**: Análisis de 24h, 7d, 30d, 90d con muestreo inteligente (fl_chart)
+- ✅ **Simulación IoT**: Generación de datos realistas cada 30s basados en CSV históricos
+- ✅ **Mapas Interactivos**: Visualización geográfica de estaciones (flutter_map)
+- ✅ **Modo Offline**: Fallback a datos CSV cuando no hay conexión
+- ✅ **Temas**: Modo claro/oscuro con Material Design 3
+- ✅ **Alertas de Calidad**: Sistema de colores según LMP DIGESA
+
+### Pantallas Principales
+- **Login/Registro**: Autenticación + modo demo
+- **Dashboard**: Vista en tiempo real con métricas clave (pH, TDS, Turbidez, Cloro)
+- **Gráficos**: Análisis histórico con múltiples períodos
+- **Mapa**: Ubicación de estaciones en cuenca del Río Acarí
+- **Detalle de Estación**: Vista expandida de estación individual
+- **Configuración**: Ajustes de tema y preferencias
+
+## Arquitectura
+
+### Clean Architecture + Repository Pattern
 
 ```
 lib/
-├── core/                           # Núcleo de la aplicación
-│   ├── constants/                  # Constantes globales
-│   ├── errors/                     # Manejo de errores
-│   ├── themes/                     # Temas y estilos
-│   ├── utils/                      # Utilidades generales
-│   └── widgets/                    # Widgets compartidos
-├── shared/                         # Recursos compartidos
-│   ├── data/                       # Servicios de datos compartidos
-│   ├── domain/                     # Entidades y lógica de dominio
-│   └── presentation/               # Widgets de presentación compartidos
-└── features/                       # Módulos por funcionalidad
-    ├── auth/                       # Autenticación de usuarios
-    ├── dashboard/                  # Panel principal de monitoreo
-    ├── charts/                     # Análisis y gráficos históricos
-    ├── alerts/                     # Sistema de alertas
-    ├── maps/                       # Localización de estaciones
-    ├── settings/                   # Configuración de la app
-    └── info/                       # Información y normativas
+├── core/                          # Configuración global
+│   ├── constants/
+│   │   ├── app_constants.dart     # LMP DIGESA, umbrales de calidad
+│   │   └── api_constants.dart     # Configuración de APIs
+│   ├── providers/
+│   │   └── theme_provider.dart    # Gestión de temas
+│   └── themes/
+│       └── app_theme.dart         # Material Design 3
+│
+├── features/                      # Módulos por funcionalidad
+│   ├── auth/                      # Autenticación
+│   │   ├── data/repositories/
+│   │   └── presentation/pages/
+│   ├── dashboard/                 # Dashboard principal
+│   │   └── presentation/pages/
+│   ├── charts/                    # Análisis histórico
+│   │   └── presentation/
+│   ├── maps/                      # Visualización geográfica
+│   │   └── presentation/
+│   └── settings/                  # Configuración
+│       └── presentation/
+│
+├── shared/                        # Código compartido
+│   ├── domain/entities/           # Entidades del negocio
+│   │   ├── measurement.dart       # Mediciones de sensores
+│   │   ├── station.dart           # Estaciones de monitoreo
+│   │   ├── sensor.dart            # Tipos de sensores
+│   │   ├── alert.dart             # Alertas de calidad
+│   │   └── user.dart              # Usuarios
+│   └── data/services/
+│       ├── firebase_data_service.dart    # CRUD Firebase
+│       ├── csv_data_service.dart         # Lectura CSV
+│       ├── sensor_simulator_service.dart # Simulación IoT
+│       └── simulated_data_service.dart   # Generación de datos
+│
+├── scripts/                       # Herramientas de desarrollo
+│   ├── migrate_csv_to_firebase.dart
+│   └── check_firebase_data.dart
+│
+└── firebase_options.dart          # Configuración Firebase
 ```
 
-## Funcionalidades
+### Flujo de Datos (Cloud-First)
 
-### Implementadas
-- **Autenticación**: Sistema de login con modo demo
-- **Dashboard**: Monitoreo en tiempo real de estaciones
-- **Simulación de Datos**: Generación de datos realistas de sensores
-- **Modelos de Datos**: Entidades completas para agua, sensores, alertas
-- **Temas**: Diseño responsive con modo claro/oscuro
-- **Arquitectura**: Clean Architecture con BLoC pattern
+```
+Usuario Abre App → Firebase Auth → Dashboard
+                                       ↓
+                      Firebase Realtime DB (Online)
+                                       ↓
+                    Sensor Simulator (cada 30s)
+                                       ↓
+                    Guardar en Firebase + UI Update
+                                       ↓
+                    Si Offline → CSV Fallback
+```
 
-### En Desarrollo
-- **Gráficos**: Análisis histórico con charts interactivos
-- **Alertas**: Sistema de notificaciones automáticas
-- **Mapas**: Geolocalización de estaciones con Google Maps
-- **Configuración**: Ajustes de usuario y preferencias
-- **Información**: Normativas y documentación técnica
+## Parámetros de Calidad Monitoreados
 
-## Parámetros de Calidad del Agua
+Según **LMP DIGESA** (Límites Máximos Permisibles) y estándares OMS:
 
-La aplicación monitorea los siguientes parámetros según normativas peruanas (DIGESA) y estándares de la OMS para agua segura:
+| Parámetro | Rango Óptimo | Rango Aceptable | Unidad | Sensor |
+|-----------|--------------|-----------------|--------|--------|
+| **pH** | 7.0 - 7.5 | 6.5 - 8.5 | pH | Electrodo de vidrio (±0.1) |
+| **TDS** | 0 - 500 | 0 - 1000 | mg/L | Conductividad (±1%) |
+| **Turbidez** | 0 - 1.0 | 0 - 5.0 | UNT | Sensor óptico (±0.1) |
+| **Cloro Residual** | 0.5 - 1.5 | 0.5 - 5.0 | mg/L | Electroquímico DPD (±0.05) |
 
-| Parámetro | Rango Óptimo | Rango Aceptable | Unidad | Importancia para Pueblos Jóvenes |
-|-----------|--------------|-----------------|---------|-----------------------------------|
-| pH | 7.0 - 7.5 | 6.5 - 8.5 | pH | Esencial para salud digestiva |
-| Oxígeno Disuelto | 7.0 - 10.0 | 5.0 - 14.0 | mg/L | Indica calidad biológica del agua |
-| Temperatura | 18.0 - 25.0 | 0.0 - 30.0 | °C | Clima árido de Arequipa |
-| Turbidez | 0.0 - 0.3 | 0.0 - 1.0 | NTU | Indicador visual de pureza |
-| Conductividad | 100.0 - 300.0 | 50.0 - 500.0 | µS/cm | Minerales disueltos |
-| Amoníaco | 0.0 - 0.02 | 0.0 - 0.5 | mg/L | Contaminación fecal |
-| Nitritos | 0.0 - 0.1 | 0.0 - 1.0 | mg/L | Contaminación bacteriana |
-| Nitratos | 0.0 - 5.0 | 0.0 - 10.0 | mg/L | Contaminación agrícola |
+### Sistema de Alertas por Color
 
-## Tecnologías Utilizadas
+- 🟢 **Verde**: Óptimo - Agua segura para consumo
+- 🟡 **Amarillo**: Advertencia - Requiere atención
+- 🔴 **Rojo**: Crítico - Fuera de LMP DIGESA
+
+## Stack Tecnológico
 
 ### Frontend
-- **Flutter**: Framework multiplataforma
-- **Dart**: Lenguaje de programación
-- **BLoC**: Gestión de estado
-- **Go Router**: Navegación
+- **Flutter** 3.5.4 - Framework multiplataforma
+- **Dart** 3.5.4 - Lenguaje de programación
+- **Provider** - Gestión de estado
+- **Go Router** - Navegación declarativa
 
-### UI/UX
-- **Material Design 3**: Sistema de diseño
-- **FL Chart**: Gráficos y visualizaciones
-- **Syncfusion Charts**: Charts avanzados
+### Backend & Cloud
+- **Firebase Auth** 4.19.6 - Autenticación de usuarios
+- **Firebase Realtime Database** 10.5.6 - Base de datos NoSQL en tiempo real
+- **Firebase Cloud** - Persistencia offline (10MB)
 
-### Datos y Backend (Simulado)
-- **SQLite**: Base de datos local
-- **CSV**: Datos de ejemplo
-- **Shared Preferences**: Configuraciones
+### UI & Visualización
+- **Material Design 3** - Sistema de diseño moderno
+- **fl_chart** 0.69.0 - Gráficos interactivos
+- **flutter_map** 8.2.2 - Mapas con OpenStreetMap
 
-### Mapas y Localización
-- **Google Maps**: Visualización de mapas
-- **Geolocator**: Servicios de ubicación
-- **Geocoding**: Conversión de coordenadas
+### Data & Storage
+- **SQLite** 2.3.3 - Base de datos local
+- **CSV** 6.0.0 - Datos históricos de respaldo
+- **Shared Preferences** 2.2.2 - Preferencias del usuario
+- **JSON Serialization** - Conversión automática de datos
 
-### Sensores (Simulados)
-- **Sensors Plus**: Simulación de sensores
-- **HTTP**: Comunicación con APIs
-- **WebSocket**: Datos en tiempo real
+### Servicios
+- **Geolocator** 12.0.0 - Servicios de ubicación GPS
+- **Geocoding** 3.0.0 - Conversión coordenadas/direcciones
+- **HTTP** 1.2.2 - Cliente HTTP
+- **Web Socket Channel** 2.4.5 - Comunicación en tiempo real
 
-## Instalación y Configuración
+### Notificaciones
+- **Flutter Local Notifications** 17.2.2 - Alertas push locales
+
+## Instalación
 
 ### Prerrequisitos
-- Flutter SDK (3.9.2 o superior)
-- Dart SDK
-- Android Studio / VS Code
-- Git
+- **Flutter SDK** ≥ 3.9.2
+- **Dart SDK** ≥ 3.9.2
+- **Android Studio** / **VS Code** con extensiones Flutter
+- **Git**
+- Cuenta de **Firebase** (para funcionalidades cloud)
 
-### Instalación
+### Pasos de Instalación
+
+1. **Clonar el repositorio**
 ```bash
-# Instalar dependencias
-flutter pub get
-
-# Generar archivos de código
-flutter packages pub run build_runner build
-
-# Ejecutar la aplicación
-flutter run
+git clone https://github.com/AnthonyM-ed/WaterQualityAnalyzer.git
+cd WaterQualityAnalyzer
 ```
 
-## Estaciones de Monitoreo en Pueblos Jóvenes de Arequipa
+2. **Instalar dependencias**
+```bash
+flutter pub get
+```
 
-La aplicación incluye 5 estaciones de ejemplo en pueblos jóvenes de Arequipa:
+3. **Generar archivos de serialización**
+```bash
+flutter packages pub run build_runner build --delete-conflicting-outputs
+```
 
-1. **Alto Selva Alegre** - Zona alta sin agua potable
-2. **Pueblo Joven Villa El Salvador** - Asentamiento humano 
-3. **Cerro Colorado** - Zona periférica con pozos artesanales
-4. **Ciudad de Dios** - Comunidad con tanques cisternas
-5. **Río Seco** - Asentamiento cerca del río Chili
+4. **Configurar Firebase** (Opcional para funcionalidades cloud)
+```bash
+# Instalar FlutterFire CLI
+dart pub global activate flutterfire_cli
 
-## Simulación de Datos
+# Configurar Firebase para el proyecto
+flutterfire configure
+```
 
-El sistema simula datos realistas con las siguientes características específicas para Arequipa:
-- **70%** de lecturas en rango óptimo (ideal para consumo)
-- **20%** de lecturas en rango aceptable (requiere tratamiento básico)
-- **10%** de lecturas fuera de rango (peligroso para consumo - genera alertas críticas)
-- Actualizaciones cada 30 segundos
-- Variación según clima árido y condiciones locales
-- Simulación de contaminación común en pueblos jóvenes
+5. **Ejecutar la aplicación**
+```bash
+# Android
+flutter run -d android
 
----
-*Desarrollado con ❤️ para garantizar agua segura en los pueblos jóvenes de Arequipa, Perú*
+# iOS
+flutter run -d ios
+
+# Windows
+flutter run -d windows
+
+# Web
+flutter run -d chrome
+```
+
+### Modo Demo
+
+El **botón "Acceso Demo"** permite:
+- Acceso directo al dashboard sin registro
+- Explorar todas las funcionalidades de la app
+- **Requiere Firebase configurado** (la app intenta cargar datos cloud)
+- Si no hay conexión, automáticamente usa datos CSV históricos como fallback
+
+**Nota**: El modo demo salta la autenticación pero la app sigue intentando conectarse a Firebase para datos en tiempo real. Para funcionar completamente offline, la app tiene un sistema de fallback automático a CSV.
+
+## Estaciones de Monitoreo
+
+### Cuenca del Río Acarí, Caravelí - Arequipa
+
+| Estación | Nombre | Ubicación | Elevación | Descripción |
+|----------|--------|-----------|-----------|-------------|
+| **CA-08** | Zona Media Alta | -15.4265°, -74.6139° | 1200 m | Aguas arriba - Control de calidad zona alta |
+| **CA-09** | Pueblo Acarí | -15.4324°, -74.6169° | 430 m | Estación principal cercana al pueblo |
+| **CA-10** | Zona Baja | -15.4395°, -74.6139° | 420 m | Aguas abajo - Monitoreo impacto urbano |
+
+> **Base histórica**: Datos basados en "Parámetros fisicoquímicos cuenca río Acarí" (2008)
+
+### Simulación de Sensores IoT
+
+El sistema genera datos realistas cada **30 segundos** con las siguientes características:
+
+- **Baseline CSV**: Datos históricos reales de la cuenca (2008)
+- **Variaciones**: Drift de sensores (±5%) simulando condiciones naturales
+- **Patrones**: Ciclos diurnos, estacionalidad, eventos de contaminación
+- **Anomalías**: 10% probabilidad de valores fuera de LMP (genera alertas)
+
+#### Características de Simulación por Estación:
+- **CA-08** (Zona Alta): Agua más limpia, bajo TDS, cloro 0.7 mg/L
+- **CA-09** (Pueblo): Impacto moderado, TDS medio, cloro 0.4 mg/L
+- **CA-10** (Zona Baja): Mayor turbidez, impacto urbano, cloro 0.15 mg/L
+
+## Autores
+
+- **Equipo de Desarrollo** - *Trabajo inicial* - [AnthonyM-ed](https://github.com/AnthonyM-ed)
+
+## Agradecimientos
+
+- Datos históricos basados en "Parámetros fisicoquímicos cuenca río Acarí" (2008)
+- Normativas DIGESA (Perú) y OMS para estándares de calidad del agua
+- Comunidad de Acarí, Caravelí - Arequipa
+
