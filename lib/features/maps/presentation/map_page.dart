@@ -4,6 +4,7 @@ import 'package:latlong2/latlong.dart';
 
 import '../../../core/constants/app_constants.dart';
 import '../../../shared/data/services/csv_data_service.dart';
+import '../../../shared/data/services/firebase_data_service.dart';
 import '../../../shared/data/services/simulated_data_service.dart';
 import '../../../shared/domain/domain.dart';
 import '../../dashboard/presentation/pages/station_detail_page.dart';
@@ -21,6 +22,7 @@ class _MapPageState extends State<MapPage> {
   List<WaterStation> _stations = [];
   final Map<String, WaterQualityReading> _latestReadings = {};
   bool _isLoading = true;
+  final _firebaseData = FirebaseDataService();
 
   // Center point: CA-09 (closest to Acarí town)
   static const LatLng _centerLocation = LatLng(
@@ -41,20 +43,28 @@ class _MapPageState extends State<MapPage> {
       // Load stations
       _stations = SimulatedDataService.createDefaultStations();
 
-      // Get latest readings from CSV for each station
+      // Get latest readings - Firebase first, then CSV fallback
       for (var station in _stations) {
-        final stationReadings = await CsvDataService.getStationReadings(station.id);
-        if (stationReadings.isNotEmpty) {
-          // Use the most recent reading
-          _latestReadings[station.id] = stationReadings.last;
+        // Try Firebase first (cloud-first strategy)
+        final firebaseReading = await _firebaseData.getLatestReading(station.id);
+        
+        if (firebaseReading != null) {
+          // Use Firebase data (real-time from cloud)
+          _latestReadings[station.id] = firebaseReading;
         } else {
-          // Fallback to simulated data if no CSV data
-          final reading = SimulatedDataService.generateReading(station.id);
-          _latestReadings[station.id] = reading;
+          // Fallback to CSV if Firebase has no data
+          final stationReadings = await CsvDataService.getStationReadings(station.id);
+          if (stationReadings.isNotEmpty) {
+            _latestReadings[station.id] = stationReadings.last;
+          } else {
+            // Last resort: generate simulated data
+            final reading = SimulatedDataService.generateReading(station.id);
+            _latestReadings[station.id] = reading;
+          }
         }
       }
 
-      // Create markers
+      // Create markers with updated data
       _createMarkers();
     } catch (e) {
       debugPrint('Error loading stations: $e');
@@ -341,11 +351,6 @@ class _MapPageState extends State<MapPage> {
                     ),
                   ],
                 ),
-              ),
-              IconButton(
-                icon: const Icon(Icons.refresh),
-                onPressed: _loadStationsAndMarkers,
-                tooltip: 'Actualizar',
               ),
             ],
           ),
