@@ -231,27 +231,21 @@ class SensorSimulatorService {
       case 'CA-08': // Zona Media Alta - Best quality
         return {
           'pH': 7.6,
-          'temperature': 26.0,
           'tds': 180.0,
-          'conductivity': 720.0,
           'turbidity': 1.2,
           'chlorine_residual': 0.7,
         };
       case 'CA-09': // Pueblo Acarí - Medium quality
         return {
           'pH': 7.4,
-          'temperature': 24.0,
           'tds': 170.0,
-          'conductivity': 1550.0,
           'turbidity': 2.5,
           'chlorine_residual': 0.4,
         };
       case 'CA-10': // Zona Baja - Worst quality
         return {
           'pH': 7.1,
-          'temperature': 22.0,
           'tds': 1650.0,
-          'conductivity': 3850.0,
           'turbidity': 3.5,
           'chlorine_residual': 0.15,
         };
@@ -265,12 +259,8 @@ class SensorSimulatorService {
     switch (param) {
       case 'pH':
         return 0.3; // ±0.3 pH units
-      case 'temperature':
-        return 1.5; // ±1.5°C
       case 'tds':
         return 50.0; // ±50 ppm
-      case 'conductivity':
-        return 100.0; // ±100 µS/cm
       case 'turbidity':
         return 0.5; // ±0.5 NTU
       case 'chlorine_residual':
@@ -285,12 +275,8 @@ class SensorSimulatorService {
     switch (param) {
       case 'pH':
         return value.clamp(5.0, 11.5);
-      case 'temperature':
-        return value.clamp(15.0, 35.0);
       case 'tds':
         return value.clamp(50.0, 3000.0);
-      case 'conductivity':
-        return value.clamp(100.0, 5500.0);
       case 'turbidity':
         return value.clamp(0.1, 10.0);
       case 'chlorine_residual':
@@ -302,7 +288,7 @@ class SensorSimulatorService {
 
   /// Simulate sensor anomalies (contamination events, malfunctions)
   Map<String, double> _simulateAnomaly(String stationId, Map<String, double> parameters) {
-    final anomalyType = _random.nextInt(5);
+    final anomalyType = _random.nextInt(4);
     
     switch (anomalyType) {
       case 0: // pH spike (chemical discharge)
@@ -320,10 +306,6 @@ class SensorSimulatorService {
       case 3: // TDS spike (contamination)
         parameters['tds'] = parameters['tds']! * 1.5;
         print('[$stationId] ANOMALY: TDS spike!');
-        break;
-      case 4: // Temperature spike
-        parameters['temperature'] = 30.0 + _random.nextDouble() * 3.0;
-        print('[$stationId] ANOMALY: High temperature!');
         break;
     }
     
