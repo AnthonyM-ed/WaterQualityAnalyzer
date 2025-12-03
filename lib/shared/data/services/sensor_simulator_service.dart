@@ -5,9 +5,6 @@ import '../../../core/constants/app_constants.dart';
 import 'csv_data_service.dart';
 import 'firebase_data_service.dart';
 
-/// Simulates IoT sensors sending data periodically
-/// Uses REAL CSV data as baseline and adds small realistic variations
-/// Mimics real sensor behavior: readings every 30 seconds with sensor drift
 class SensorSimulatorService {
   static final SensorSimulatorService _instance = SensorSimulatorService._internal();
   factory SensorSimulatorService() => _instance;

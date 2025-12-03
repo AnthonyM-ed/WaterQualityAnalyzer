@@ -4,10 +4,6 @@ import '../../../../shared/data/services/firebase_data_service.dart';
 class AuthRepository {
   static final _auth = FirebaseAuth.instance;
   static final _firebaseData = FirebaseDataService();
-
-  // NOTA: Si el registro falla con error "CONFIGURATION_NOT_FOUND",
-  // es necesario desactivar reCAPTCHA en Firebase Console > Authentication > Settings
-  // Ver docs/FIREBASE_AUTH_FIX.md para más detalles
   
   // Register a new user
   static Future<Map<String, dynamic>> register({

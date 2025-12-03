@@ -18,7 +18,6 @@ class FirebaseDataService {
   /// Verificar conectividad real a Firebase (no cache local)
   Future<bool> isOnline() async {
     try {
-      // Intentar leer un nodo simple con timeout
       final testRef = _database.ref('_connection_test');
       await testRef.get().timeout(
         const Duration(seconds: 3),
@@ -53,9 +52,9 @@ class FirebaseDataService {
         'lastUpdate': DateTime.now().toIso8601String(),
         'sensorIds': station.sensorIds,
       });
-      print('✅ Station ${station.id} saved to Firebase');
+      print('Station ${station.id} saved to Firebase');
     } catch (e) {
-      print('❌ Error saving station: $e');
+      print('Error saving station: $e');
       rethrow;
     }
   }
@@ -118,7 +117,7 @@ class FirebaseDataService {
         ),
       );
     } catch (e) {
-      print('❌ Error getting station: $e');
+      print('Error getting station: $e');
       return null;
     }
   }
@@ -169,7 +168,7 @@ class FirebaseDataService {
       final data = Map<String, dynamic>.from(snapshot.value as Map);
       return _parseReading(data);
     } catch (e) {
-      print('❌ Error getting latest reading: $e');
+      print('Error getting latest reading: $e');
       return null;
     }
   }
@@ -183,10 +182,6 @@ class FirebaseDataService {
     });
   }
 
-  /// Obtener lecturas históricas de una estación
-  /// startDate: fecha de inicio (opcional)
-  /// endDate: fecha de fin (opcional)
-  /// limit: límite de resultados (default: 100)
   Future<List<WaterQualityReading>> getHistoricalReadings({
     required String stationId,
     DateTime? startDate,
@@ -194,9 +189,6 @@ class FirebaseDataService {
     int limit = 100,
   }) async {
     try {
-      // Obtener TODOS los datos de la estación (Firebase Realtime DB no soporta bien
-      // queries complejas con timestamps como claves, así que filtramos en memoria)
-      // Firebase automáticamente usa cache si no hay conexión
       final snapshot = await _readingsRef.child(stationId).get();
       
       if (!snapshot.exists) {
@@ -219,7 +211,7 @@ class FirebaseDataService {
           
           readings.add(reading);
         } catch (e) {
-          print('⚠️ Error parsing reading with key $key: $e');
+          print('Error parsing reading with key $key: $e');
         }
       });
 
@@ -233,7 +225,7 @@ class FirebaseDataService {
 
       return readings;
     } catch (e) {
-      print('❌ Error getting historical readings: $e');
+      print('Error getting historical readings: $e');
       return [];
     }
   }
@@ -283,9 +275,9 @@ class FirebaseDataService {
         'createdAt': DateTime.now().toIso8601String(),
         'lastLogin': DateTime.now().toIso8601String(),
       });
-      print('✅ User $uid saved to Firebase');
+      print('User $uid saved to Firebase');
     } catch (e) {
-      print('❌ Error saving user: $e');
+      print('Error saving user: $e');
       rethrow;
     }
   }
@@ -297,7 +289,7 @@ class FirebaseDataService {
         'lastLogin': DateTime.now().toIso8601String(),
       });
     } catch (e) {
-      print('❌ Error updating last login: $e');
+      print('Error updating last login: $e');
     }
   }
 
@@ -309,7 +301,7 @@ class FirebaseDataService {
 
       return Map<String, dynamic>.from(snapshot.value as Map);
     } catch (e) {
-      print('❌ Error getting user: $e');
+      print('Error getting user: $e');
       return null;
     }
   }
@@ -398,13 +390,13 @@ class FirebaseDataService {
         final timestamp = int.tryParse(key);
         if (timestamp != null && timestamp < cutoffTimestamp) {
           await _readingsRef.child(stationId).child(key).remove();
-          print('🗑️ Removed old reading: $key');
+          print('Removed old reading: $key');
         }
       }
 
-      print('✅ Cleaned old readings for station $stationId');
+      print('Cleaned old readings for station $stationId');
     } catch (e) {
-      print('❌ Error cleaning old readings: $e');
+      print('Error cleaning old readings: $e');
     }
   }
 }

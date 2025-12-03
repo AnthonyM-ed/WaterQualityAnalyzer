@@ -96,7 +96,7 @@ class _ChartsPageState extends State<ChartsPage> {
     final now = DateTime.now();
     final startDate = now.subtract(duration);
     
-    print('📅 Fetching data from Firebase');
+    print('Fetching data from Firebase');
     print('   Período: $_selectedPeriod');
     print('   Start: ${startDate.toIso8601String()}');
     print('   End: ${now.toIso8601String()}');
@@ -110,8 +110,6 @@ class _ChartsPageState extends State<ChartsPage> {
       limit: 10000, // Límite alto para obtener todos los datos del período
     );
 
-    // Si tenemos demasiados datos, aplicar muestreo inteligente
-    // Para gráficos más fluidos, limitar a máximo 100 puntos
     if (readings.isNotEmpty) {
       final maxPoints = _selectedPeriod == '24h' ? 50 : estimatedReadings;
       if (readings.length > maxPoints) {
@@ -119,8 +117,6 @@ class _ChartsPageState extends State<ChartsPage> {
       }
     }
 
-    // Convert to chart data (invertir orden para que el gráfico vaya de antiguo a reciente)
-    // readings ya está ordenado de más reciente a más antiguo, necesitamos revertir
     final reversedReadings = readings.reversed.toList();
     
     for (final reading in reversedReadings) {
@@ -353,10 +349,8 @@ class _ChartsPageState extends State<ChartsPage> {
       if (value > maxY) maxY = value;
     }
 
-    // Add padding to Y axis (more for large values like TDS)
     final range = maxY - minY;
     
-    // Si todos los valores son iguales (range = 0), usar un rango por defecto
     if (range == 0) {
       final baseValue = maxY;
       minY = math.max(0, baseValue - 1);

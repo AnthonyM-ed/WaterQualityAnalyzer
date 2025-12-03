@@ -45,7 +45,7 @@ class _DashboardPageState extends State<DashboardPage> {
     super.dispose();
   }
 
-  /// Start real-time sensor simulation (mimics MQTT/Firebase)
+  /// Start real-time sensor simulation 
   Future<void> _startRealtimeUpdates() async {
     // Subscribe to sensor updates
     _sensorSimulator.subscribe(_onSensorData);
@@ -56,7 +56,7 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  /// Handle incoming sensor data (like MQTT message received)
+  /// Handle incoming sensor data 
   void _onSensorData(WaterQualityReading reading) {
     if (mounted) {
       setState(() {

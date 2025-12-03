@@ -43,7 +43,7 @@ class _MapPageState extends State<MapPage> {
       // Load stations
       _stations = SimulatedDataService.createDefaultStations();
 
-      // Get latest readings - Firebase first, then CSV fallback
+      // Get latest readings 
       for (var station in _stations) {
         // Try Firebase first (cloud-first strategy)
         final firebaseReading = await _firebaseData.getLatestReading(station.id);
