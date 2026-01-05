@@ -243,9 +243,9 @@ El sistema genera datos realistas cada **30 segundos** con las siguientes caract
 - **CA-09** (Pueblo): Impacto moderado, TDS medio, cloro 0.4 mg/L
 - **CA-10** (Zona Baja): Mayor turbidez, impacto urbano, cloro 0.15 mg/L
 
-## Autores
+## Autor
 
-- **Equipo de Desarrollo** - *Trabajo inicial* - [AnthonyM-ed](https://github.com/AnthonyM-ed)
+- **Desarrollo** - [AnthonyM-ed](https://github.com/AnthonyM-ed)
 
 ## Agradecimientos
 
