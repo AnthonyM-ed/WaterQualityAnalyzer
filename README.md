@@ -243,6 +243,10 @@ El sistema genera datos realistas cada **30 segundos** con las siguientes caract
 - **CA-09** (Pueblo): Impacto moderado, TDS medio, cloro 0.4 mg/L
 - **CA-10** (Zona Baja): Mayor turbidez, impacto urbano, cloro 0.15 mg/L
 
+## Descarga
+
+**Puedes descargar la aplicación directamente desde el siguiente enlace:** [app-debug.apk](https://drive.google.com/file/d/18e3XVBhAxmkQ9uAAZYAroZwkrFG40QKm/view?usp=drive_link)
+
 ## Autor
 
 - **Desarrollo** - [AnthonyM-ed](https://github.com/AnthonyM-ed)
